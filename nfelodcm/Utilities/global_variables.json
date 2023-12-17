@@ -1,0 +1,16 @@
+{
+    "season_states": {
+        "last_full_week": {
+            "season": 2023,
+            "week": 14
+        },
+        "last_partial_week": {
+            "season": 2023,
+            "week": 15
+        },
+        "next_week": {
+            "season": 2023,
+            "week": 16
+        }
+    }
+}

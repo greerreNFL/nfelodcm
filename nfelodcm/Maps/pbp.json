@@ -1,0 +1,22 @@
+{
+  "name": "pbp",
+  "description": "nflfastR play-by-play",
+  "last_local_update": "2023-12-16T22:48:36.771560",
+  "download_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{0}.csv.gz",
+  "compression": "gzip",
+  "engine": "c",
+  "freshness": {
+    "type": "gh_release",
+    "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
+    "gh_release_tag": "pbp",
+    "sla_seconds": null
+  },
+  "iter": {
+    "type": "season",
+    "start": 1999
+  },
+  "assignments": [],
+  "map": {
+    "game_id": "object"
+  }
+}
