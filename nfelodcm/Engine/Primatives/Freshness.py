@@ -11,6 +11,7 @@ class Freshness():
     def __init__(self, config):
         self.config = config
         self.needs_update = False
+        self.freshness_check_time = None
         self.check_freshness()
         
     ## helpers ##  
@@ -36,6 +37,33 @@ class Freshness():
         if year is None:
             raise ValueError('ERROR: Could not determine current season.')
         return download_url.format(year)
+    
+    ## primary SLA check ##
+    def sla_check(self):
+        """
+        Checks SLA seconds and the last update timestamp from the config, to determine if
+        a freshness check is needed, or if the data is still within its SLA
+        """
+        ## fails SLA if null ##
+        if self.config['freshness']['last_freshness_check'] is None or self.config['freshness']['sla_seconds'] is None:
+            ## either freshness was never previously established or there is no SLA and freshness should be checked ##
+            return False
+        else:
+            ## get seconds since last freshness check ##
+            last_freshness_check = datetime.datetime.fromisoformat(
+                self.config['freshness']['last_freshness_check']
+            ).astimezone(datetime.timezone.utc)
+            seconds_since_last_check = (
+                datetime.datetime.now(datetime.timezone.utc) -
+                last_freshness_check
+            ).total_seconds()
+            ## compare to sla ##
+            if seconds_since_last_check > self.config['freshness']['sla_seconds']:
+                ## if freshness state breaches SLA, update freshness
+                return False
+            else:
+                ## if the time since the last check is less than the SLA, then it passes
+                return True
     
     ## config types ##
     def check_gh_release_freshness(self):
@@ -176,15 +204,20 @@ class Freshness():
             github_endpoint
         )
     
-    
     def check_freshness(self):
         """
         Wrapper function that checks data freshness for a map given a freshness config.
         """
-        ## check the data type and route to appropriate function ##
-        if self.config['freshness']['type'] == 'gh_release':
-            self.check_gh_release_freshness()
-        elif self.config['freshness']['type'] == 'gh_commit':
-            self.check_gh_commit_freshness()
-        else:
-            raise ValueError('ERROR: Freshness type not recognized.')
+        ## check the freshness sla ##
+        sla_passing = self.sla_check()
+        ## update if it is not passing ##
+        if not sla_passing:
+            ## check the data type and route to appropriate function ##
+            if self.config['freshness']['type'] == 'gh_release':
+                self.check_gh_release_freshness()
+            elif self.config['freshness']['type'] == 'gh_commit':
+                self.check_gh_commit_freshness()
+            else:
+                raise ValueError('ERROR: Freshness type not recognized.')
+            ## update last check property with the current time since freshness was checked ##
+            self.freshness_check_time = datetime.datetime.now(datetime.timezone.utc).isoformat()

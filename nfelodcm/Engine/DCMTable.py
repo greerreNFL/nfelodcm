@@ -49,7 +49,13 @@ class DCMTable():
         """
         Handles loading of the table based on freshness status.
         """
-        ## check freshness ##
+        if self.freshness.freshness_check_time is not None:
+            ## if freshness was checked, update the time in the config ##
+            self.tableMap.config['freshness']['last_freshness_check'] = self.freshness.freshness_check_time
+            self.tableMap.update_map(
+                self.tableMap.config
+            )
+        ## reference freshness to determine where to pull data from ##
         if self.freshness.needs_update:
             ## pull new data ##
             self.dataPull.update_data()
