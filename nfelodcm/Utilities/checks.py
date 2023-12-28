@@ -61,7 +61,8 @@ def check_map_type(map):
     """
     allowed_types = [
         'object', 'int32', 'int64', 'float32', 'float64',
-        'boolean', 'interval', 'category', 'datetime64[ns, <tz>]'
+        'boolean', 'interval', 'category', 'datetime64[ns, <tz>]',
+        'bool'
     ]
     ## containers ##
     passing = True

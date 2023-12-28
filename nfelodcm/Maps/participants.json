@@ -1,0 +1,41 @@
+{
+  "name": "participants",
+  "description": "nflfastR participants",
+  "last_local_update": null,
+  "download_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp_participation/pbp_participation_{0}.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_release",
+    "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
+    "gh_release_tag": "pbp_participation",
+    "sla_seconds": 900,
+    "last_freshness_check": null
+  },
+  "iter": {
+    "type": "season",
+    "start": 2016
+  },
+  "assignments": [],
+  "map": {
+    "old_game_id": "int32",
+    "play_id": "int32",
+    "possession_team": "object",
+    "offense_formation": "object",
+    "offense_personnel": "object",
+    "defenders_in_box": "float32",
+    "defense_personnel": "object",
+    "number_of_pass_rushers": "float32",
+    "players_on_play": "object",
+    "offense_players": "object",
+    "defense_players": "object",
+    "n_offense": "int32",
+    "n_defense": "int32",
+    "ngs_air_yards": "float32",
+    "time_to_throw": "float32",
+    "was_pressure": "object",
+    "route": "object",
+    "defense_man_zone_type": "float32",
+    "defense_coverage_type": "float32"
+  }
+}

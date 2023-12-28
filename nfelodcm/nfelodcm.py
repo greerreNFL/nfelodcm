@@ -26,3 +26,20 @@ def load(tables):
         db[table] = get_df(table)
     ## return db struc ##
     return db
+
+def get_map(url):
+    '''
+    reads a web based csv and returns a column map
+    with 64 to 32 downcasting
+    '''
+    df = pd.read_csv(url)
+    for col in df.columns.tolist():
+        dtype = df[col].dtype.name
+        ## downcast ##
+        if '64' in dtype:
+            dtype = dtype.replace('64', '32')
+        ## print ##
+        print('"{0}": "{1}",'.format(
+            col, dtype
+        ))
+        

@@ -1,0 +1,52 @@
+{
+  "name": "rosters",
+  "description": "nflfastR rosters",
+  "last_local_update": "2023-12-25T15:41:40.705755",
+  "download_url": "https://github.com/nflverse/nflverse-data/releases/download/rosters/roster_{0}.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_release",
+    "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
+    "gh_release_tag": "rosters",
+    "sla_seconds": 900,
+    "last_freshness_check": "2023-12-25T15:41:28.343402+00:00"
+  },
+  "iter": {
+    "type": "season",
+    "start": 1999
+  },
+  "assignments": [],
+  "map": {
+    "season": "int32",
+    "team": "object",
+    "position": "object",
+    "depth_chart_position": "object",
+    "jersey_number": "float32",
+    "status": "object",
+    "full_name": "object",
+    "first_name": "object",
+    "last_name": "object",
+    "birth_date": "object",
+    "height": "float32",
+    "weight": "float32",
+    "college": "object",
+    "gsis_id": "object",
+    "espn_id": "float32",
+    "sportradar_id": "object",
+    "yahoo_id": "float32",
+    "rotowire_id": "float32",
+    "pff_id": "float32",
+    "pfr_id": "object",
+    "fantasy_data_id": "float32",
+    "sleeper_id": "float32",
+    "years_exp": "float32",
+    "headshot_url": "object",
+    "esb_id": "object",
+    "gsis_it_id": "float32",
+    "smart_id": "object",
+    "entry_year": "float32",
+    "rookie_year": "float32",
+    "draft_club": "object"
+  }
+}

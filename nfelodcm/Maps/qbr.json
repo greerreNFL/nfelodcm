@@ -1,0 +1,45 @@
+{
+  "name": "qbr",
+  "description": "nflverse QBR",
+  "last_local_update": "2023-12-25T15:36:48.684268",
+  "download_url": "https://github.com/nflverse/nflverse-data/releases/download/espn_data/qbr_season_level.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_release",
+    "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
+    "gh_release_tag": "espn_data",
+    "sla_seconds": 900,
+    "last_freshness_check": "2023-12-25T15:36:48.244102+00:00"
+  },
+  "iter": {
+    "type": null,
+    "start": null
+  },
+  "assignments": [],
+  "map": {
+    "season": "int32",
+    "season_type": "object",
+    "game_week": "object",
+    "team_abb": "object",
+    "player_id": "int32",
+    "name_short": "object",
+    "rank": "float32",
+    "qbr_total": "float32",
+    "pts_added": "float32",
+    "qb_plays": "int32",
+    "epa_total": "float32",
+    "pass": "float32",
+    "run": "float32",
+    "exp_sack": "int32",
+    "penalty": "float32",
+    "qbr_raw": "float32",
+    "sack": "float32",
+    "name_first": "object",
+    "name_last": "object",
+    "name_display": "object",
+    "headshot_href": "object",
+    "team": "object",
+    "qualified": "bool"
+  }
+}
