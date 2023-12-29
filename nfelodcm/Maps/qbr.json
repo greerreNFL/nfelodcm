@@ -1,7 +1,7 @@
 {
   "name": "qbr",
   "description": "nflverse QBR",
-  "last_local_update": "2023-12-25T15:36:48.684268",
+  "last_local_update": null,
   "download_url": "https://github.com/nflverse/nflverse-data/releases/download/espn_data/qbr_season_level.csv",
   "compression": null,
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "espn_data",
     "sla_seconds": 900,
-    "last_freshness_check": "2023-12-25T15:36:48.244102+00:00"
+    "last_freshness_check": null
   },
   "iter": {
     "type": null,

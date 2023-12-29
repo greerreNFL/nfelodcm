@@ -4,7 +4,7 @@ import pathlib
 import json
 import datetime
 
-## script that runs on package import to check format of config file, existance of csvs, and columns ##
+
 def check_struc(config):
     """
     Checks to ensure the config structure is valid
@@ -79,3 +79,32 @@ def check_map_type(map):
     ## return ##
     return passing, errors
 
+def check_data():
+    '''
+    Runs on load and checks for the existence of local data for each map. If data does not exist,
+    freshness meta data in the map is reset
+    '''
+    ## get maps ##
+    maps_dir = pathlib.Path(__file__).parent.parent.resolve() / 'Maps'
+    maps = list(maps_dir.glob('*.json'))
+    ## check that maps were found ##
+    if len(maps) == 0:
+        return
+    ## for each map, parse name, check for csv, and make updates as needed ##
+    for map_path in maps:
+        ## parse the name ##
+        table = map_path.stem
+        ## check for the csv ##
+        csv_path = pathlib.Path(
+            pathlib.Path(__file__).parent.parent.resolve() / 'Data' / '{0}.csv'.format(table)
+        )
+        csv_path.exists()
+        if not csv_path.exists():
+            ## if the csv does not exist, update the map file ##
+            with open(map_path, 'r+') as config_file:
+                data = json.load(config_file)
+                data['last_local_update'] = None
+                data['freshness']['last_freshness_check'] = None
+                config_file.seek(0)  # reset file position to the beginning
+                json.dump(data, config_file, indent=2)
+                config_file.truncate()  # remove remaining part```

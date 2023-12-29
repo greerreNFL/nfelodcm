@@ -6,6 +6,8 @@ import nfelodcm.nfelodcm.Utilities as utils
 
 ## init season state on load ##
 utils.set_season_state()
+## update local data freshness meta as needed ##
+utils.check_data()
 
 ## wrappers and classes to interact with the package ##
 def get_df(table):
