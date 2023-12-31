@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nfelodcm"
-version = "0.1.1"
+version = "0.1.2"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
@@ -33,6 +33,11 @@ dependencies = [
     "pandas>=1.5.3",
     "requests",
 ]
+
+[tool.setuptools]
+packages = ["nfelodcm"]
+package-dir = {"nfelodcm" = '.'}
+package-data = {'nfelodcm' = ['nfelodcm/**']}
 
 [project.urls]
 homepage = "https://github.com/greerreNFL/nfelodcm"
