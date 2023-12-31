@@ -78,6 +78,16 @@ def check_map_type(map):
     ## return ##
     return passing, errors
 
+def check_data_folder():
+    '''
+    Runs on load and checks that the data folder exists. If it does not, it creates it
+    '''
+    ## get data ##
+    data_dir = pathlib.Path(__file__).parent.parent.resolve() / 'Data'
+    ## if it does not exist, create ##
+    if not data_dir.exists():
+        data_dir.mkdir()
+
 def check_data():
     '''
     Runs on load and checks for the existence of local data for each map. If data does not exist,

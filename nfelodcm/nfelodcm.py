@@ -4,6 +4,8 @@ import numpy
 from .Engine import DCMTable
 import nfelodcm.nfelodcm.Utilities as utils
 
+## ensure local data folder exists ##
+utils.check_data_folder()
 ## init season state on load ##
 utils.set_season_state()
 ## update local data freshness meta as needed ##
