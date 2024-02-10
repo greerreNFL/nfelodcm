@@ -40,7 +40,7 @@
     "nfl_detail_id": "object",
     "pfr": "object",
     "pff": "float32",
-    "espn": "int32",
+    "espn": "float32",
     "ftn": "float32",
     "away_rest": "int32",
     "home_rest": "int32",
