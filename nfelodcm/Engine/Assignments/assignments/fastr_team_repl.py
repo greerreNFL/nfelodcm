@@ -14,6 +14,15 @@ def game_id_repl(df):
     """
     df['away_team'] = df['away_team'].replace(repl)
     df['home_team'] = df['home_team'].replace(repl)
+    ## add extra checks to make comparable with pbp ##
+    for col in [
+        'posteam', 'defteam', 'penalty_team',
+        'side_of_field', 'timeout_team', 'td_team',
+        'return_team'
+    ]:
+        if col in df.columns:
+            df[col] = df[col].replace(repl)
+    ## id col ##
     df['game_id'] = (
         df['season'].astype('str') + '_' +
         df['week'].astype('str').str.zfill(2) + '_' +

@@ -1,10 +1,23 @@
-from .assignments import game_id_repl
+from .assignments import (
+    game_id_repl, penalty_formatting, desc_based_plays
+)
 
 ## a dictionary that holds assignments and the columns they add ##
 assignments = {
     'game_id_repl' : {
         'func' : game_id_repl,
         'new_columns' : []
+    },
+    'penalty_formatting' : {
+        'func' : penalty_formatting,
+        'new_columns' : []
+    },
+    'desc_based_plays' : {
+        'func' : desc_based_plays,
+        'new_columns' : [
+            'qb_dropback_all',  'rush_attempt_all',
+            'play_call'
+        ]
     }
 }
 

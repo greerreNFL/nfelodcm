@@ -16,7 +16,9 @@
     "type": "season",
     "start": 1999
   },
-  "assignments": [],
+  "assignments": [
+    "game_id_repl", "penalty_formatting", "desc_based_plays"
+  ],
   "map": {
     "play_id": "int32",
     "game_id": "object",
