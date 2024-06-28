@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy
+import pathlib
+import json
 
 from .Engine import DCMTable
 import nfelodcm.nfelodcm.Utilities as utils
@@ -46,4 +48,23 @@ def get_map(url):
         print('"{0}": "{1}",'.format(
             col, dtype
         ))
-        
+
+def get_season_state(state_type='last_full_week'):
+    '''
+    Returns the season and week of the specified state type:
+       'last_full_week' (default): the last week in which no games are still unplayed
+       'last_partual_week': the last week where any game has been played
+       'next_week': the first week with no games played
+    '''
+    ## open global variables json ##
+    global_variables = None
+    with open('{0}/global_variables.json'.format(pathlib.Path(__file__).parent.resolve()), 'r') as fp:
+        ## load config ##
+        global_variables = json.load(fp)
+    ## check input ##
+    if state_type not in list(global_variables['season_states'].keys()):
+        raise Exception('UTILITY ERROR: {0} is not an available state_type. Available types: {1}'.format(
+            state_type, '\n     '.join(list(global_variables['season_states'].keys()))
+        ))
+    ## if state valid, return ##
+    return global_variables[state_type]['season'], global_variables[state_type]['week']

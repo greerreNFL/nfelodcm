@@ -15,8 +15,9 @@ assignments = {
     'desc_based_plays' : {
         'func' : desc_based_plays,
         'new_columns' : [
-            'qb_dropback_all',  'rush_attempt_all',
-            'play_call'
+            ('qb_dropback_all', 'float32'),
+            ('rush_attempt_all', 'float32'),
+            ('play_call', 'str'),
         ]
     }
 }
