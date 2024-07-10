@@ -159,6 +159,8 @@ class Freshness():
             ## handle response ##
             if r.status_code != 200:
                 print('WARN: Request to github commits failed.')
+                print('      Returned {0}'.format(r.status_code))
+                print('      Msg: {0}'.format(r.content))
                 return
             r = r.json()
             if len(r) == 0:

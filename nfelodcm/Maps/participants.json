@@ -1,7 +1,7 @@
 {
   "name": "participants",
   "description": "nflfastR participants",
-  "last_local_update": null,
+  "last_local_update": "2024-07-10T17:16:25.862176",
   "download_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp_participation/pbp_participation_{0}.csv",
   "compression": null,
   "engine": "c",
@@ -10,14 +10,17 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "pbp_participation",
     "sla_seconds": 900,
-    "last_freshness_check": null
+    "last_freshness_check": "2024-07-10T17:16:08.727121+00:00"
   },
   "iter": {
     "type": "season",
     "start": 2016
   },
-  "assignments": [],
+  "assignments": [
+    "fastr_team_id_repl"
+  ],
   "map": {
+    "nflverse_game_id": "object",
     "old_game_id": "int32",
     "play_id": "int32",
     "possession_team": "object",
@@ -35,7 +38,7 @@
     "time_to_throw": "float32",
     "was_pressure": "object",
     "route": "object",
-    "defense_man_zone_type": "float32",
-    "defense_coverage_type": "float32"
+    "defense_man_zone_type": "object",
+    "defense_coverage_type": "object"
   }
 }

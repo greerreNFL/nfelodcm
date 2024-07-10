@@ -1,11 +1,11 @@
 from .assignments import (
-    game_id_repl, penalty_formatting, desc_based_plays
+    fastr_team_id_repl, penalty_formatting, desc_based_plays
 )
 
 ## a dictionary that holds assignments and the columns they add ##
 assignments = {
-    'game_id_repl' : {
-        'func' : game_id_repl,
+    'fastr_team_id_repl' : {
+        'func' : fastr_team_id_repl,
         'new_columns' : []
     },
     'penalty_formatting' : {

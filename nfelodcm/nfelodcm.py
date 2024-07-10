@@ -58,7 +58,7 @@ def get_season_state(state_type='last_full_week'):
     '''
     ## open global variables json ##
     global_variables = None
-    with open('{0}/global_variables.json'.format(pathlib.Path(__file__).parent.resolve()), 'r') as fp:
+    with open('{0}/Utilities/global_variables.json'.format(pathlib.Path(__file__).parent.resolve()), 'r') as fp:
         ## load config ##
         global_variables = json.load(fp)
     ## check input ##
@@ -67,4 +67,4 @@ def get_season_state(state_type='last_full_week'):
             state_type, '\n     '.join(list(global_variables['season_states'].keys()))
         ))
     ## if state valid, return ##
-    return global_variables[state_type]['season'], global_variables[state_type]['week']
+    return global_variables['season_states'][state_type]['season'], global_variables['season_states'][state_type]['week']

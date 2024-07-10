@@ -1,0 +1,34 @@
+{
+  "name": "filmmargins",
+  "description": "Margins derived from PFF grades",
+  "last_local_update": "2024-07-07T23:35:11.485380",
+  "download_url": "https://raw.githubusercontent.com/greerreNFL/filmmargin/main/film_margins.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_commit",
+    "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/filmmargin/commits?path=film_margins.csv",
+    "gh_release_tag": null,
+    "sla_seconds": 900,
+    "last_freshness_check": "2024-07-10T17:15:32.031946+00:00"
+  },
+  "iter": {
+    "type": null,
+    "start": null
+  },
+  "assignments": [],
+  "map": {
+    "Unnamed: 0": "int32",
+    "game_id": "object",
+    "season": "int32",
+    "week": "int32",
+    "team": "object",
+    "opponent": "object",
+    "pf": "int32",
+    "pa": "int32",
+    "margin": "int32",
+    "film_margin": "float32",
+    "film_margin_predictive": "float32",
+    "film_margin_old_model": "float32"
+  }
+}

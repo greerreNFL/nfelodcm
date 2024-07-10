@@ -8,25 +8,27 @@ repl = {
     'LA' : 'LAR',
 }
 
-def game_id_repl(df):
+def team_id_repl(df):
     """
-    Replaces fastr game_ids with a legacy game id.
+    Replaces fastr team ids with a legacy nfelo ids.
     """
-    df['away_team'] = df['away_team'].replace(repl)
-    df['home_team'] = df['home_team'].replace(repl)
-    ## add extra checks to make comparable with pbp ##
+    ## if a col with team names exists, replace it ##
     for col in [
+        'home_team', 'away_team', 'team_abbr',
         'posteam', 'defteam', 'penalty_team',
         'side_of_field', 'timeout_team', 'td_team',
-        'return_team'
+        'return_team', 'possession_team',
+        'recent_team', 'opponent_team'
     ]:
         if col in df.columns:
             df[col] = df[col].replace(repl)
-    ## id col ##
-    df['game_id'] = (
-        df['season'].astype('str') + '_' +
-        df['week'].astype('str').str.zfill(2) + '_' +
-        df['away_team'] + '_' +
-        df['home_team']
-    )
+    ## if game if is also in the DF, replace it
+    if 'game_id' in df.columns:
+        ## id col ##
+        df['game_id'] = (
+            df['season'].astype('str') + '_' +
+            df['week'].astype('str').str.zfill(2) + '_' +
+            df['away_team'] + '_' +
+            df['home_team']
+        )
     return df

@@ -1,0 +1,57 @@
+{
+  "name": "players",
+  "description": "nflfastR player meta data",
+  "last_local_update": "2024-07-10T17:16:29.561868",
+  "download_url": "https://github.com/nflverse/nflverse-data/releases/download/players/players.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_release",
+    "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
+    "gh_release_tag": "players",
+    "sla_seconds": 900,
+    "last_freshness_check": "2024-07-10T17:16:27.390522+00:00"
+  },
+  "iter": {
+    "type": null,
+    "start": null
+  },
+  "assignments": [
+    "fastr_team_id_repl"
+  ],
+  "map": {
+    "status": "object",
+    "display_name": "object",
+    "first_name": "object",
+    "last_name": "object",
+    "esb_id": "object",
+    "gsis_id": "object",
+    "birth_date": "object",
+    "college_name": "object",
+    "position_group": "object",
+    "position": "object",
+    "jersey_number": "float32",
+    "height": "float32",
+    "weight": "float32",
+    "years_of_experience": "float32",
+    "team_abbr": "object",
+    "team_seq": "float32",
+    "current_team_id": "float32",
+    "football_name": "object",
+    "entry_year": "float32",
+    "rookie_year": "float32",
+    "draft_club": "object",
+    "draft_number": "float32",
+    "college_conference": "object",
+    "status_description_abbr": "object",
+    "status_short_description": "object",
+    "gsis_it_id": "float32",
+    "short_name": "object",
+    "smart_id": "object",
+    "headshot": "object",
+    "suffix": "object",
+    "uniform_number": "object",
+    "draft_round": "float32",
+    "season": "float32"
+  }
+}

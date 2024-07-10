@@ -1,0 +1,40 @@
+{
+  "name": "wepa",
+  "description": "nfelo Weighted Expected Points Model",
+  "last_local_update": "2024-07-07T23:13:39.454179",
+  "download_url": "https://raw.githubusercontent.com/greerreNFL/wepa/main/data/wepa_by_game_pit.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_commit",
+    "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/wepa/commits?path=data/wepa_by_game_pit.csv",
+    "gh_release_tag": null,
+    "sla_seconds": 900,
+    "last_freshness_check": "2024-07-10T17:16:06.701316+00:00"
+  },
+  "iter": {
+    "type": null,
+    "start": null
+  },
+  "assignments": [],
+  "map": {
+    "Unnamed: 0": "int32",
+    "game_id": "object",
+    "team": "object",
+    "opponent": "object",
+    "season": "int32",
+    "game_number": "int32",
+    "margin": "float32",
+    "margin_against": "float32",
+    "epa": "float32",
+    "epa_against": "float32",
+    "epa_net": "float32",
+    "epa_net_opponent": "float32",
+    "wepa": "float32",
+    "d_wepa": "float32",
+    "wepa_net": "float32",
+    "wepa_against": "float32",
+    "d_wepa_against": "float32",
+    "wepa_net_opponent": "float32"
+  }
+}

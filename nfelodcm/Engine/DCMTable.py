@@ -49,6 +49,12 @@ class DCMTable():
         """
         Handles loading of the table based on freshness status.
         """
+        ## add a check to always make sure there is a local file in the DB.
+        ## If a CSV is deleted or a write fails, timestamps, and therefore
+        ## freshness, may incorrectly assume we have a current file to read
+        if not self.localIO.loadable():
+            ## if the csv does not exist, flag the update flag ##
+            self.freshness.needs_update=True
         if self.freshness.freshness_check_time is not None:
             ## if freshness was checked, update the time in the config ##
             self.tableMap.config['freshness']['last_freshness_check'] = self.freshness.freshness_check_time

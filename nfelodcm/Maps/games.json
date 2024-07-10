@@ -1,7 +1,7 @@
 {
   "name": "games",
   "description": "nflgamedata games",
-  "last_local_update": "2023-12-31T04:51:21.399721",
+  "last_local_update": "2024-07-07T23:13:58.469798",
   "download_url": "https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv",
   "compression": null,
   "engine": "c",
@@ -10,14 +10,14 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nfldata/commits",
     "gh_release_tag": null,
     "sla_seconds": 500,
-    "last_freshness_check": "2023-12-31T05:27:06.725310+00:00"
+    "last_freshness_check": "2024-07-10T17:15:31.355055+00:00"
   },
   "iter": {
     "type": null,
     "start": null
   },
   "assignments": [
-    "game_id_repl"
+    "fastr_team_id_repl"
   ],
   "map": {
     "game_id": "object",
