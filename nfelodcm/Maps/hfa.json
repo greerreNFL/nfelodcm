@@ -1,0 +1,39 @@
+{
+  "name": "hfa",
+  "description": "Estimated home field advantage by game",
+  "last_local_update": null,
+  "download_url": "https://raw.githubusercontent.com/greerreNFL/nfelohfa/main/estimated_hfa.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_commit",
+    "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelohfa/commits?path=estimated_hfa.csv",
+    "gh_release_tag": null,
+    "sla_seconds": 900,
+    "last_freshness_check": "2024-07-10T17:16:06.701316+00:00"
+  },
+  "iter": {
+    "type": null,
+    "start": null
+  },
+  "assignments": [],
+  "map": {
+    "game_id": "object",
+    "season": "int32",
+    "week": "int32",
+    "home_team": "object",
+    "away_team": "object",
+    "home_bye": "int32",
+    "away_bye": "int32",
+    "home_time_advantage": "float32",
+    "dif_surface": "int32",
+    "div_game": "int32",
+    "hfa_base": "float32",
+    "home_bye_adj": "float32",
+    "away_bye_adj": "float32",
+    "home_time_advantage_adj": "float32",
+    "dif_surface_adj": "float32",
+    "div_game_adj": "float32",
+    "hfa_adj": "float32"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "wt_ratings",
+  "description": "Win Totals and ratings derived from win totals (WT Ratings)",
+  "last_local_update": "2024-07-07T23:13:39.454179",
+  "download_url": "https://raw.githubusercontent.com/greerreNFL/nfelosrs/main/wt_ratings.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_commit",
+    "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelosrs/commits?path=wt_ratings.csv",
+    "gh_release_tag": null,
+    "sla_seconds": 900,
+    "last_freshness_check": "2024-07-10T17:16:06.701316+00:00"
+  },
+  "iter": {
+    "type": null,
+    "start": null
+  },
+  "assignments": [],
+  "map": {
+    "team": "object",
+    "season": "int32",
+    "wt_rating": "float32",
+    "wt_rating_elo": "float32",
+    "sos": "float32",
+    "line": "float32",
+    "over_odds": "int32",
+    "under_odds": "int32",
+    "hold": "float32",
+    "over_probability": "float32",
+    "under_probability": "float32",
+    "line_adj": "float32"
+  }
+}

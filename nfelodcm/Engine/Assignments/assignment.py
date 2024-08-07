@@ -1,5 +1,6 @@
 from .assignments import (
-    fastr_team_id_repl, penalty_formatting, desc_based_plays
+    fastr_team_id_repl, penalty_formatting, desc_based_plays,
+    score_clean
 )
 
 ## a dictionary that holds assignments and the columns they add ##
@@ -19,6 +20,10 @@ assignments = {
             ('rush_attempt_all', 'float32'),
             ('play_call', 'str'),
         ]
+    },
+    'score_clean' : {
+        'func' : score_clean,
+        'new_columns' : []
     }
 }
 

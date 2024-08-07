@@ -17,7 +17,7 @@
     "start": null
   },
   "assignments": [
-    "fastr_team_id_repl"
+    "fastr_team_id_repl", "score_clean"
   ],
   "map": {
     "game_id": "object",
