@@ -1,7 +1,7 @@
 {
   "name": "srs",
   "description": "A Simple Ranking System implimentation for the NFL",
-  "last_local_update": "2024-07-07T23:13:39.454179",
+  "last_local_update": "2024-08-16T17:31:10.910765",
   "download_url": "https://raw.githubusercontent.com/greerreNFL/nfelosrs/main/srs_ratings.csv",
   "compression": null,
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelosrs/commits?path=srs_ratings.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2024-07-10T17:16:06.701316+00:00"
+    "last_freshness_check": "2024-08-16T17:31:10.266324+00:00"
   },
   "iter": {
     "type": null,

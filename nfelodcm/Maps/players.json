@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "players",
     "sla_seconds": 900,
-    "last_freshness_check": "2024-07-10T17:16:27.390522+00:00"
+    "last_freshness_check": "2024-08-16T17:31:14.934544+00:00"
   },
   "iter": {
     "type": null,
@@ -51,7 +51,6 @@
     "headshot": "object",
     "suffix": "object",
     "uniform_number": "object",
-    "draft_round": "float32",
-    "season": "float32"
+    "draft_round": "float32"
   }
 }

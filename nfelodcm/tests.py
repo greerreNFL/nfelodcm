@@ -31,7 +31,7 @@ def test_all_maps():
             l2_start = time.time()
             get_df(table_map)
             l2_end = time.time()
-            print('          2st load completed in {0} seconds'.format(round(
+            print('          2nd load completed in {0} seconds'.format(round(
                 l2_end-l2_start,3
             )))
 

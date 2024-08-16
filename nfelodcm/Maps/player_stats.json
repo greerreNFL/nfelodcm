@@ -1,7 +1,7 @@
 {
   "name": "player_stats",
   "description": "nflfastR player stats",
-  "last_local_update": "2024-07-07T23:37:18.361644",
+  "last_local_update": "2024-08-16T17:31:08.070803",
   "download_url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/player_stats.csv.gz",
   "compression": "gzip",
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "player_stats",
     "sla_seconds": 900,
-    "last_freshness_check": "2024-07-10T17:16:05.954026+00:00"
+    "last_freshness_check": "2024-08-16T17:31:05.676678+00:00"
   },
   "iter": {
     "type": null,
