@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "pbp_participation",
     "sla_seconds": 900,
-    "last_freshness_check": "2024-08-16T17:31:12.360053+00:00"
+    "last_freshness_check": "2024-08-18T17:51:55.960661+00:00"
   },
   "iter": {
     "type": "season",

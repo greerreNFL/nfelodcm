@@ -1,7 +1,7 @@
 {
   "name": "qbelo",
   "description": "538/nfelo QB Elo model",
-  "last_local_update": "2024-08-16T17:31:09.930695",
+  "last_local_update": "2024-08-18T17:51:53.719214",
   "download_url": "https://raw.githubusercontent.com/greerreNFL/nfeloqb/main/qb_elos.csv",
   "compression": null,
   "engine": "c",
@@ -10,16 +10,20 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfeloqb/commits?path=qb_elos.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2024-08-16T17:31:08.979510+00:00"
+    "last_freshness_check": "2024-08-18T17:51:52.659336+00:00"
   },
   "iter": {
     "type": null,
     "start": null
   },
-  "assignments": [],
+  "assignments": [
+    "fix_elo_qb_names"
+  ],
   "map": {
     "date": "object",
     "season": "int32",
+    "week": "float32",
+    "game_id": "object",
     "neutral": "int32",
     "playoff": "object",
     "team1": "object",
@@ -50,6 +54,7 @@
     "score2": "float32",
     "quality": "float32",
     "importance": "float32",
-    "total_rating": "float32"
+    "total_rating": "float32",
+    "game_type": "object"
   }
 }

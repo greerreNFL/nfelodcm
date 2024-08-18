@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "espn_data",
     "sla_seconds": 900,
-    "last_freshness_check": "2024-08-16T17:28:02.465853+00:00"
+    "last_freshness_check": "2024-08-18T17:49:09.510108+00:00"
   },
   "iter": {
     "type": null,

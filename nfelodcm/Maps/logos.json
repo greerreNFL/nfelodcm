@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-pbp/commits?path=teams_colors_logos.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2024-08-16T17:28:47.897717+00:00"
+    "last_freshness_check": "2024-08-18T17:49:10.512043+00:00"
   },
   "iter": {
     "type": null,

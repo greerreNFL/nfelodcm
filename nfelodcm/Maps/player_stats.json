@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "player_stats",
     "sla_seconds": 900,
-    "last_freshness_check": "2024-08-16T17:31:05.676678+00:00"
+    "last_freshness_check": "2024-08-18T17:49:43.735234+00:00"
   },
   "iter": {
     "type": null,

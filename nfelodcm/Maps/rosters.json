@@ -10,13 +10,15 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "rosters",
     "sla_seconds": 900,
-    "last_freshness_check": "2024-08-16T17:31:11.813338+00:00"
+    "last_freshness_check": "2024-08-18T17:51:55.412934+00:00"
   },
   "iter": {
     "type": "season",
     "start": 1999
   },
-  "assignments": [],
+  "assignments": [
+    "fix_fastr_qb_names"
+  ],
   "map": {
     "season": "int32",
     "team": "object",
