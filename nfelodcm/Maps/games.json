@@ -1,7 +1,7 @@
 {
   "name": "games",
   "description": "nflgamedata games",
-  "last_local_update": "2024-08-18T17:49:10.204394",
+  "last_local_update": "2024-10-14T03:43:31.843120",
   "download_url": "https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv",
   "compression": null,
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nfldata/commits",
     "gh_release_tag": null,
     "sla_seconds": 500,
-    "last_freshness_check": "2024-08-18T17:49:09.852096+00:00"
+    "last_freshness_check": "2024-10-14T03:43:31.451383+00:00"
   },
   "iter": {
     "type": null,

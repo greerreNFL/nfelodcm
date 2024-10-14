@@ -19,15 +19,36 @@ class DataPull():
         """
         Pulls data from the url and returns a pandas dataframe
         """
-        ## pull data ##
-        df = pd.read_csv(
-            url,
-            usecols=self.columns,
-            dtype=self.dtypes,
-            engine=self.config['engine']
-        )
-        ## add pulled data to container ##
-        self.pulled_data.append(df)
+        ## logic for retries ##
+        retries_remaining = 3
+        pull_error = None
+        while retries_remaining > 0:
+            try:
+                ## pull data ##
+                df = pd.read_csv(
+                    url,
+                    usecols=self.columns,
+                    dtype=self.dtypes,
+                    engine=self.config['engine']
+                )
+                ## add pulled data to container ##
+                self.pulled_data.append(df)
+                ## end if successful ##
+                break
+            except Exception as e:
+                print('ERROR: Failed to pull data from {0}. Retrying...'.format(
+                    url
+                ))
+                pull_error = e
+                retries_remaining -= 1
+        ## if retries are exhausted, raise an error ##
+        if retries_remaining == 0:
+            raise ValueError(
+                'ERROR: Failed to pull data from {0} after 3 retries: {1}'.format(
+                    url,
+                    pull_error
+                )
+            )
         
     def handle_pull(self):
         """
