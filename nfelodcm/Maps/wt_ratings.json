@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelosrs/commits?path=wt_ratings.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2024-10-14T03:46:48.024623+00:00"
+    "last_freshness_check": "2025-01-03T21:20:37.040642+00:00"
   },
   "iter": {
     "type": null,

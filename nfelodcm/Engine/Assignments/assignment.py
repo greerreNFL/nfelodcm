@@ -1,6 +1,7 @@
 from .assignments import (
     fastr_team_id_repl, penalty_formatting, desc_based_plays,
-    score_clean, fix_elo_qb_names, fix_fastr_qb_names
+    score_clean, fix_elo_qb_names, fix_fastr_qb_names,
+    temp_players_handle
 )
 
 ## a dictionary that holds assignments and the columns they add ##
@@ -31,6 +32,10 @@ assignments = {
     },
     'fix_fastr_qb_names' : {
         'func' : fix_fastr_qb_names,
+        'new_columns' : []
+    },
+    'temp_players_handle' : {
+        'func' : temp_players_handle,
         'new_columns' : []
     }
 }

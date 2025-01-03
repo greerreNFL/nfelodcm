@@ -1,7 +1,7 @@
 {
   "name": "players",
   "description": "nflfastR player meta data",
-  "last_local_update": "2024-10-14T03:46:46.634500",
+  "last_local_update": "2025-01-03T21:20:35.956066",
   "download_url": "https://github.com/nflverse/nflverse-data/releases/download/players/players.csv",
   "compression": null,
   "engine": "c",
@@ -10,14 +10,15 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "players",
     "sla_seconds": 900,
-    "last_freshness_check": "2024-10-14T03:46:45.509051+00:00"
+    "last_freshness_check": "2025-01-03T21:17:33.598945+00:00"
   },
   "iter": {
     "type": null,
     "start": null
   },
   "assignments": [
-    "fastr_team_id_repl"
+    "fastr_team_id_repl",
+    "temp_players_handle"
   ],
   "map": {
     "status": "object",
@@ -51,6 +52,6 @@
     "headshot": "object",
     "suffix": "object",
     "uniform_number": "object",
-    "draft_round": "float32"
+    "draftround": "float32"
   }
 }
