@@ -1,7 +1,7 @@
 {
   "name": "qbelo",
   "description": "538/nfelo QB Elo model",
-  "last_local_update": "2025-01-03T21:14:25.907519",
+  "last_local_update": "2025-02-16T22:15:59.132733",
   "download_url": "https://raw.githubusercontent.com/greerreNFL/nfeloqb/main/qb_elos.csv",
   "compression": null,
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfeloqb/commits?path=qb_elos.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2025-01-03T21:14:24.875668+00:00"
+    "last_freshness_check": "2025-02-16T22:15:57.129304+00:00"
   },
   "iter": {
     "type": null,

@@ -1,7 +1,7 @@
 {
   "name": "filmmargins",
   "description": "Margins derived from PFF grades",
-  "last_local_update": "2025-01-03T21:11:46.318977",
+  "last_local_update": "2025-02-16T22:09:34.314279",
   "download_url": "https://raw.githubusercontent.com/greerreNFL/filmmargin/main/film_margins.csv",
   "compression": null,
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/filmmargin/commits?path=film_margins.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2025-01-03T21:11:45.817545+00:00"
+    "last_freshness_check": "2025-02-16T22:09:33.640711+00:00"
   },
   "iter": {
     "type": null,

@@ -1,7 +1,7 @@
 {
   "name": "wepa",
   "description": "nfelo Weighted Expected Points Model",
-  "last_local_update": "2025-01-03T21:14:24.493060",
+  "last_local_update": "2025-02-16T22:15:56.751414",
   "download_url": "https://raw.githubusercontent.com/greerreNFL/wepa/main/data/wepa_by_game_pit.csv",
   "compression": null,
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/wepa/commits?path=data/wepa_by_game_pit.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2025-01-03T21:14:23.444597+00:00"
+    "last_freshness_check": "2025-02-16T22:15:54.752364+00:00"
   },
   "iter": {
     "type": null,

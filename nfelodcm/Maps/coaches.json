@@ -1,7 +1,7 @@
 {
   "name": "coaches",
   "description": "Aggregated head coaching stats",
-  "last_local_update": "2025-01-03T21:20:36.722940",
+  "last_local_update": "2025-02-16T22:16:47.243318",
   "download_url": "https://raw.githubusercontent.com/greerreNFL/coaches/main/coaches.csv",
   "compression": null,
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/coaches/commits?path=coaches.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2025-01-03T21:20:36.372038+00:00"
+    "last_freshness_check": "2025-02-16T22:16:46.766999+00:00"
   },
   "iter": {
     "type": null,
