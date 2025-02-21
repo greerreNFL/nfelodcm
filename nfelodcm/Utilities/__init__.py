@@ -5,3 +5,4 @@ from .checks import check_struc
 from .checks import check_map_type
 from .checks import check_data
 from .checks import check_data_folder
+from .load_maps import load_maps

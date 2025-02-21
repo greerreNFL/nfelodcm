@@ -1,7 +1,7 @@
 {
   "name": "team_stadiums",
   "description": "Metadata and analytics for NFL teams and their stadiums",
-  "last_local_update": "2025-02-16T22:09:34.777661",
+  "last_local_update": "2025-02-21T21:36:04.215102",
   "download_url": "https://raw.githubusercontent.com/greerreNFL/Stadiums/refs/heads/main/data/team_stadiums.csv",
   "compression": null,
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/Stadiums/commits?path=data/team_stadiums.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2025-02-16T22:09:34.634198+00:00"
+    "last_freshness_check": "2025-02-21T21:36:04.105770+00:00"
   },
   "iter": {
     "type": null,
@@ -18,11 +18,15 @@
   },
   "assignments": [],
   "map": {
+    "team": "object",
+    "team_fastr": "object",
+    "stadium": "object",
+    "is_current": "bool",
     "stadium_name": "object",
     "lat": "float32",
     "lon": "float32",
     "altitude": "float32",
-    "heading": "float32",
+    "heading": "int32",
     "first_game_date": "object",
     "last_game_date": "object",
     "surface_type": "object",
@@ -33,7 +37,7 @@
     "zipcode": "object",
     "country": "object",
     "tz": "object",
-    "tz_offset": "float32",
+    "tz_offset": "int32",
     "wikipedia_url": "object",
     "img_sat_url": "object",
     "img_logo_url": "object",
@@ -44,7 +48,7 @@
     "operator": "object",
     "capacity": "float32",
     "broke_ground": "float32",
-    "opened": "float32",
+    "opened": "int32",
     "closed": "float32",
     "demolished": "float32",
     "construction_cost": "float32",

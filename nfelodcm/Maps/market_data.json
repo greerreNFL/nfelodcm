@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelomarket_data/commits?path=Data/lines.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2025-02-16T22:16:00.686478+00:00"
+    "last_freshness_check": "2025-02-21T21:38:51.171757+00:00"
   },
   "iter": {
     "type": null,

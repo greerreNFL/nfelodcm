@@ -1,8 +1,12 @@
-import pandas as pd
-import numpy
+## built-in ##
 import pathlib
 import json
+from typing import List, Dict
+## external ##
+import pandas as pd
+import numpy
 
+## local ##
 from .Engine import DCMTable
 import nfelodcm.nfelodcm.Utilities as utils
 
@@ -14,19 +18,39 @@ utils.set_season_state()
 utils.check_data()
 
 ## wrappers and classes to interact with the package ##
-def get_df(table):
+def get_df(table: str) -> pd.DataFrame:
     """
-    gets a single table
+    Load a single dataframe
+
+    Parameters:
+    * table: str - the name of the table to load
+
+    Returns:
+    * pd.DataFrame - the dataframe loaded from the table
     """
     engine = DCMTable(table)
     return engine.localIO.df
 
-def load(tables):
+def load(tables: List[str]) -> Dict[str, pd.DataFrame]:
     """
     loads an array of tables and returns a dictionary
+
+    Parameters:
+    * tables: List[str] - a list of table names to load
+
+    Returns:
+    * Dict[str, pd.DataFrame] - a dictionary of table names and their corresponding dataframes
     """
     ## init db structure ##
     db = {}
+    ## check that all passed tables have maps ##
+    map_data = utils.load_maps()
+    maps = list(map_data.keys()) if len(map_data) > 0 else []
+    missing_maps = [t for t in tables if t not in maps]
+    if len(missing_maps) > 0:
+        raise Exception('MAP ERROR: The following tables do not have maps: {0}'.format(
+            '\n     '.join(missing_maps)
+        ))
     ## add tables ##
     for table in tables:
         db[table] = get_df(table)
@@ -49,7 +73,7 @@ def get_map(url):
             col, dtype
         ))
 
-def get_season_state(state_type='last_full_week'):
+def get_season_state(state_type='last_full_week') -> tuple:
     '''
     Returns the season and week of the specified state type:
        'last_full_week' (default): the last week in which no games are still unplayed
@@ -68,3 +92,20 @@ def get_season_state(state_type='last_full_week'):
         ))
     ## if state valid, return ##
     return global_variables['season_states'][state_type]['season'], global_variables['season_states'][state_type]['week']
+
+def list_tables() -> None:
+    '''
+    Lists all tables available to the package
+
+    Parameters:
+    * None
+
+    Returns:
+    * None (prints list of tables)
+    '''
+    ## get maps ##
+    maps = utils.load_maps()
+    ## print ##
+    print('Available tables:')
+    for table, table_map in maps.items():
+        print('     {0} - {1}'.format(table, table_map['description']))

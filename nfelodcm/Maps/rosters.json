@@ -1,7 +1,7 @@
 {
   "name": "rosters",
   "description": "nflfastR rosters",
-  "last_local_update": "2025-02-16T22:16:39.581240",
+  "last_local_update": "2025-02-21T21:39:16.469032",
   "download_url": "https://github.com/nflverse/nflverse-data/releases/download/rosters/roster_{0}.csv",
   "compression": null,
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "rosters",
     "sla_seconds": 900,
-    "last_freshness_check": "2025-02-16T22:16:02.273228+00:00"
+    "last_freshness_check": "2025-02-21T21:38:51.725835+00:00"
   },
   "iter": {
     "type": "season",
