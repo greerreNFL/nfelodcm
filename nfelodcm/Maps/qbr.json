@@ -1,7 +1,7 @@
 {
   "name": "qbr",
   "description": "nflverse QBR",
-  "last_local_update": "2025-02-21T21:36:02.384414",
+  "last_local_update": "2025-04-11T03:40:12.469427",
   "download_url": "https://github.com/nflverse/nflverse-data/releases/download/espn_data/qbr_season_level.csv",
   "compression": null,
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "espn_data",
     "sla_seconds": 900,
-    "last_freshness_check": "2025-02-21T21:36:01.524111+00:00"
+    "last_freshness_check": "2025-04-11T03:40:11.568916+00:00"
   },
   "iter": {
     "type": null,
