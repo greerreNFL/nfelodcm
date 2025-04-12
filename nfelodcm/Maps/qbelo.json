@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfeloqb/commits?path=qb_elos.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2025-04-11T03:43:13.960461+00:00"
+    "last_freshness_check": "2025-04-12T21:13:55.477568+00:00"
   },
   "iter": {
     "type": null,

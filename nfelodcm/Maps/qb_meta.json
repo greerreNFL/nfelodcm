@@ -1,0 +1,40 @@
+{
+  "name": "qb_meta",
+  "description": "nflfastR qb meta data that maps elo to fastr datasets",
+  "last_local_update": "2025-04-12T21:13:56.388718",
+  "download_url": "https://raw.githubusercontent.com/greerreNFL/nfeloqb/refs/heads/main/Other%20Data/meta_data.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_commit",
+    "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfeloqb/commits?path=Other%20Data/meta_data.csv",
+    "gh_release_tag": null,
+    "sla_seconds": 900,
+    "last_freshness_check": "2025-04-12T21:13:56.237127+00:00"
+  },
+  "iter": {
+    "type": null,
+    "start": null
+  },
+  "assignments": [],
+  "map": {
+    "name_id": "object",
+    "gsis_id": "object",
+    "display_name": "object",
+    "football_name": "object",
+    "first_name": "object",
+    "last_name": "object",
+    "short_name": "object",
+    "status": "object",
+    "dob": "object",
+    "college": "object",
+    "height": "float32",
+    "weight": "float32",
+    "entry_year": "float32",
+    "rookie_year": "float32",
+    "draft_number": "float32",
+    "draft_round": "float32",
+    "draft_team": "object",
+    "headshot_url": "object"
+  }
+}

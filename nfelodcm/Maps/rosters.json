@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "rosters",
     "sla_seconds": 900,
-    "last_freshness_check": "2025-04-11T03:43:15.395917+00:00"
+    "last_freshness_check": "2025-04-12T21:13:57.205221+00:00"
   },
   "iter": {
     "type": "season",

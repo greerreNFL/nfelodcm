@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelo/commits?path=output_data/nfelo_games.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2025-04-11T03:43:08.957068+00:00"
+    "last_freshness_check": "2025-04-12T21:13:53.245370+00:00"
   },
   "iter": {
     "type": null,
