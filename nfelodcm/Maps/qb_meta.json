@@ -16,7 +16,9 @@
     "type": null,
     "start": null
   },
-  "assignments": [],
+  "assignments": [
+    "fastr_team_id_repl"
+  ],
   "map": {
     "name_id": "object",
     "gsis_id": "object",
