@@ -1,7 +1,7 @@
 {
   "name": "nfelo_games",
   "description": "nfelo projections and components by game",
-  "last_local_update": "2025-04-11T03:43:09.514955",
+  "last_local_update": "2025-05-08T22:20:20.562911",
   "download_url": "https://raw.githubusercontent.com/greerreNFL/nfelo/refs/heads/main/output_data/nfelo_games.csv",
   "compression": null,
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelo/commits?path=output_data/nfelo_games.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2025-04-12T21:13:53.245370+00:00"
+    "last_freshness_check": "2025-05-08T22:20:19.834940+00:00"
   },
   "iter": {
     "type": null,
@@ -54,6 +54,8 @@
     "home_line_close": "float32",
     "home_line_close_price": "float32",
     "away_line_close_price": "float32",
+    "home_clv_from_open": "float32",
+    "away_clv_from_open": "float32",
     "total_line_open": "float32",
     "under_price_open": "float32",
     "over_price_open": "float32",

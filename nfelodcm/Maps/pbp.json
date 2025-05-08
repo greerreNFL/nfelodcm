@@ -1,7 +1,7 @@
 {
   "name": "pbp",
   "description": "nflfastR play-by-play",
-  "last_local_update": "2025-04-11T03:42:49.815214",
+  "last_local_update": "2025-05-08T22:20:01.341571",
   "download_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{0}.csv.gz",
   "compression": "gzip",
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "pbp",
     "sla_seconds": 900,
-    "last_freshness_check": "2025-04-12T21:13:17.528201+00:00"
+    "last_freshness_check": "2025-05-08T22:17:31.917295+00:00"
   },
   "iter": {
     "type": "season",

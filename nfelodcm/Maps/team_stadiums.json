@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/Stadiums/commits?path=data/team_stadiums.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2025-04-12T21:13:17.198178+00:00"
+    "last_freshness_check": "2025-05-08T22:17:31.578742+00:00"
   },
   "iter": {
     "type": null,

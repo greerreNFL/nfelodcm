@@ -1,7 +1,7 @@
 {
   "name": "games",
   "description": "nflgamedata games",
-  "last_local_update": "2025-02-21T21:36:03.065281",
+  "last_local_update": "2025-05-08T22:17:30.462733",
   "download_url": "https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv",
   "compression": null,
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nfldata/commits",
     "gh_release_tag": null,
     "sla_seconds": 500,
-    "last_freshness_check": "2025-04-12T21:13:16.138961+00:00"
+    "last_freshness_check": "2025-05-08T22:17:29.659219+00:00"
   },
   "iter": {
     "type": null,

@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/coaches/commits?path=coaches.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2025-04-12T21:14:03.026605+00:00"
+    "last_freshness_check": "2025-05-08T22:20:33.690154+00:00"
   },
   "iter": {
     "type": null,

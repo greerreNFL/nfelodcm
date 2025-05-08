@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelohfa/commits?path=estimated_hfa.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2025-04-12T21:14:03.971447+00:00"
+    "last_freshness_check": "2025-05-08T22:20:34.832384+00:00"
   },
   "iter": {
     "type": null,
