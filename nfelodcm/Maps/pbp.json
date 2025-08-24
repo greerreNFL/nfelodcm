@@ -318,6 +318,8 @@
     "xyac_fd": "float32",
     "xpass": "float32",
     "pass_oe": "float32",
+    "third_down_converted": "float32",
+    "third_down_failed": "float32",
     "fourth_down_converted": "float32",
     "fourth_down_failed": "float32"
   }

@@ -60,6 +60,11 @@ class DataPull():
             ## if not iter type, assume single download url ##
             self.pull_data(self.config['download_url'])
         elif self.config['iter']['type'] == 'season':
+            ## determine if config accepts partials ##
+            accepts_partial = False
+            missing_parts = []
+            if 'accept_partial' in self.config['iter']:
+                accepts_partial = self.config['iter']['accept_partial']
             ## if season iter, loop through seasons ##
             for season in range(
                 self.config['iter']['start'],
@@ -68,7 +73,23 @@ class DataPull():
                 ## form download url ##
                 url = self.config['download_url'].format(season)
                 ## pull data ##
-                self.pull_data(url)
+                try:
+                    self.pull_data(url)
+                except Exception as e:
+                    if accepts_partial:
+                        missing_parts.append(season)
+                        print('WARN: Failed to pull data, but partial iter data is accepted.')
+                    else:
+                        raise e
+            ## if partials accepted, ensure at least one frame was pulled ##
+            if accepts_partial:
+                if len(self.pulled_data) == 0:
+                    raise ValueError('ERROR: Partial iter data is accepted, but no data was pulled')
+                elif len(missing_parts) > 0:
+                    print('WARN: Partial iter data is accepted, but the following seasons were missing: {0}'.format(missing_parts))
+                else:
+                    ## if partials are accepted, but no missing parts, do not flag ##
+                    pass
         else:
             raise ValueError('ERROR: Iter type not recognized.')
     

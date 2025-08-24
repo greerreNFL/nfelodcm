@@ -14,7 +14,8 @@
   },
   "iter": {
     "type": "season",
-    "start": 2016
+    "start": 2016,
+    "accept_partial": true
   },
   "assignments": [
     "fastr_team_id_repl"

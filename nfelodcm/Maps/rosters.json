@@ -17,7 +17,8 @@
     "start": 1999
   },
   "assignments": [
-    "fix_fastr_qb_names"
+    "fix_fastr_qb_names",
+    "fastr_team_id_repl"
   ],
   "map": {
     "season": "int32",
