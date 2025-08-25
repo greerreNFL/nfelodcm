@@ -9,7 +9,8 @@ qb_name_repl = {
     "Matthew McGloin": "Matt McGloin",
     "Vincent Testaverde": "Vinny Testaverde",
     "Mike Vick": "Michael Vick",
-    "Phillip Walker": "P.J. Walker"
+    "Phillip Walker": "PJ Walker",
+    "P.J. Walker": "PJ Walker"
 }
 
 
@@ -19,5 +20,6 @@ def fix_fastr_qb_names(df):
     '''
     ## fix player names ##
     df['full_name'] = df['full_name'].replace(qb_name_repl)
+    df['display_name'] = df['display_name'].replace(qb_name_repl)
     ## return ##
     return df
