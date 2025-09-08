@@ -19,7 +19,8 @@ def fix_fastr_qb_names(df):
     Standardizes QB names to match elo
     '''
     ## fix player names ##
-    df['full_name'] = df['full_name'].replace(qb_name_repl)
-    df['display_name'] = df['display_name'].replace(qb_name_repl)
+    for col in ['full_name', 'display_name']:
+        if col in df.columns:
+            df[col] = df[col].replace(qb_name_repl)
     ## return ##
     return df

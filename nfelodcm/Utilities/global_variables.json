@@ -5,12 +5,12 @@
             "week": 22
         },
         "last_partial_week": {
-            "season": 2024,
-            "week": 22
+            "season": 2025,
+            "week": 1
         },
         "next_week": {
-            "season": NaN,
-            "week": NaN
+            "season": 2025,
+            "week": 2
         }
     }
 }

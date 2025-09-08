@@ -1,7 +1,7 @@
 {
   "name": "participants",
   "description": "nflfastR participants",
-  "last_local_update": "2024-07-10T17:16:25.862176",
+  "last_local_update": "2025-09-08T04:58:18.400788",
   "download_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp_participation/pbp_participation_{0}.csv",
   "compression": null,
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "pbp_participation",
     "sla_seconds": 900,
-    "last_freshness_check": "2025-05-08T22:20:27.844630+00:00"
+    "last_freshness_check": "2025-09-08T04:58:01.378790+00:00"
   },
   "iter": {
     "type": "season",

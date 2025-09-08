@@ -1,23 +1,24 @@
 {
   "name": "player_stats",
   "description": "nflfastR player stats",
-  "last_local_update": "2025-05-08T22:20:24.362121",
-  "download_url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/player_stats.csv.gz",
+  "last_local_update": "2025-09-08T04:57:54.785071",
+  "download_url": "https://github.com/nflverse/nflverse-data/releases/download/stats_player/stats_player_week_{0}.csv.gz",
   "compression": "gzip",
   "engine": "c",
   "freshness": {
     "type": "gh_release",
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
-    "gh_release_tag": "player_stats",
+    "gh_release_tag": "stats_player",
     "sla_seconds": 900,
-    "last_freshness_check": "2025-05-08T22:20:21.420258+00:00"
+    "last_freshness_check": "2025-09-08T04:55:34.980735+00:00"
   },
   "iter": {
-    "type": null,
-    "start": null
+    "type": "season",
+    "start": 1999
   },
   "assignments": [
-    "fastr_team_id_repl"
+    "fastr_team_id_repl",
+    "player_stats_repl"
   ],
   "map": {
     "player_id": "object",
@@ -26,7 +27,7 @@
     "position": "object",
     "position_group": "object",
     "headshot_url": "object",
-    "recent_team": "object",
+    "team": "object",
     "season": "int32",
     "week": "int32",
     "season_type": "object",
@@ -35,9 +36,9 @@
     "attempts": "int32",
     "passing_yards": "int32",
     "passing_tds": "int32",
-    "interceptions": "int32",
-    "sacks": "int32",
-    "sack_yards": "int32",
+    "passing_interceptions": "int32",
+    "sacks_suffered": "int32",
+    "sack_yards_lost": "int32",
     "sack_fumbles": "int32",
     "sack_fumbles_lost": "int32",
     "passing_air_yards": "int32",
@@ -46,7 +47,6 @@
     "passing_epa": "float32",
     "passing_2pt_conversions": "int32",
     "pacr": "float32",
-    "dakota": "float32",
     "carries": "int32",
     "rushing_yards": "int32",
     "rushing_tds": "int32",
@@ -70,7 +70,7 @@
     "target_share": "float32",
     "air_yards_share": "float32",
     "wopr": "float32",
-    "special_teams_tds": "int32",
+    "special_teams_tds": "float32",
     "fantasy_points": "float32",
     "fantasy_points_ppr": "float32"
   }

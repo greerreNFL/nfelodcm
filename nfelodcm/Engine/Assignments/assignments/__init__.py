@@ -5,3 +5,4 @@ from .score_clean import score_clean
 from .format_qb_file import fix_elo_qb_names
 from .format_player_file import fix_fastr_qb_names
 from .temp_players_handle import temp_players_handle
+from .player_stats_repl import player_stats_repl

@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/filmmargin/commits?path=film_margins.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2025-05-08T22:17:31.225429+00:00"
+    "last_freshness_check": "2025-09-08T04:49:30.406134+00:00"
   },
   "iter": {
     "type": null,

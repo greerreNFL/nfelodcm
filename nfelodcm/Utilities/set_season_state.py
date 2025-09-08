@@ -45,7 +45,7 @@ def set_season_state():
         
         ## set values ##
         global_variables['season_states']['last_full_week']['week'] = int(full.iloc[-1]['week'])
-        global_variables['season_states']['last_full_week']['season'] = int(partial.iloc[-1]['season'])
+        global_variables['season_states']['last_full_week']['season'] = int(full.iloc[-1]['season'])
         global_variables['season_states']['last_partial_week']['week'] = int(partial.iloc[-1]['week'])
         global_variables['season_states']['last_partial_week']['season'] = int(partial.iloc[-1]['season'])
         try:

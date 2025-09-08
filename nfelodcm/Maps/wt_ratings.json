@@ -1,7 +1,7 @@
 {
   "name": "wt_ratings",
   "description": "Win Totals and ratings derived from win totals (WT Ratings)",
-  "last_local_update": "2024-10-14T03:46:48.314022",
+  "last_local_update": "2025-09-08T04:58:45.134473",
   "download_url": "https://raw.githubusercontent.com/greerreNFL/nfelosrs/main/wt_ratings.csv",
   "compression": null,
   "engine": "c",
@@ -10,7 +10,7 @@
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelosrs/commits?path=wt_ratings.csv",
     "gh_release_tag": null,
     "sla_seconds": 900,
-    "last_freshness_check": "2025-05-08T22:20:34.333029+00:00"
+    "last_freshness_check": "2025-09-08T04:58:44.799516+00:00"
   },
   "iter": {
     "type": null,
