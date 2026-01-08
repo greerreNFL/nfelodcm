@@ -1,3 +1,4 @@
 __pycache__/
 *.csv
-.DS_Storenfelodcm.egg-info/
+.DS_Store
+nfelodcm.egg-info/
