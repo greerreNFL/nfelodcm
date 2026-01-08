@@ -10,7 +10,7 @@ repl = {
 
 def team_id_repl(df):
     """
-    Replaces fastr team ids with a legacy nfelo ids.
+    Replaces fastr team ids with legacy team ids.
     """
     ## if a col with team names exists, replace it ##
     for col in [

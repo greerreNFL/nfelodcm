@@ -1,6 +1,6 @@
-# nfelo DCM
+# UBIQ NFL Data Manager
 
-nfelo DCM is an abstraction layer for loading and saving NFL related CSVs stored on the web. DCM stands for Dataframe-CSV Mapping. The goal of the DCM is to get pandas dataframes of fresh data loaded in a way that balances simplicity, efficiency, and performance.
+UBIQ NFL Data Manager is an abstraction layer for loading and saving NFL related CSVs stored on the web. DCM stands for Dataframe-CSV Mapping. The goal of the DCM is to get pandas dataframes of fresh data loaded in a way that balances simplicity, efficiency, and performance.
 
 ```python
 import nfelodcm
