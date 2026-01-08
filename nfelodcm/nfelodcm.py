@@ -8,7 +8,7 @@ import numpy
 
 ## local ##
 from .Engine import DCMTable
-import nfelodcm.nfelodcm.Utilities as utils
+from . import Utilities as utils
 
 ## ensure local data folder exists ##
 utils.check_data_folder()

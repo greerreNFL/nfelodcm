@@ -1,16 +1,16 @@
 {
     "season_states": {
         "last_full_week": {
-            "season": 2024,
-            "week": 22
+            "season": 2025,
+            "week": 18
         },
         "last_partial_week": {
             "season": 2025,
-            "week": 1
+            "week": 18
         },
         "next_week": {
             "season": 2025,
-            "week": 2
+            "week": 19
         }
     }
 }

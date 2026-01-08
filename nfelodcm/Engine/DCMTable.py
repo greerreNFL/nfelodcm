@@ -4,7 +4,7 @@ import pathlib
 import datetime
 
 from .Primatives import TableMap, Freshness, DataPull, LocalIO
-import nfelodcm.nfelodcm.Utilities as utils
+from .. import Utilities as utils
 
 class DCMTable():
     """

@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy
 
-import nfelodcm.nfelodcm.Utilities as utils
-import nfelodcm.nfelodcm.Engine.Assignments as assignments
+from ... import Utilities as utils
+from .. import Assignments as assignments
 
 class DataPull():
     """

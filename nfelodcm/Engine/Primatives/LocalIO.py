@@ -3,8 +3,8 @@ import os
 import numpy
 import json
 
-import nfelodcm.nfelodcm.Utilities as utils
-import nfelodcm.nfelodcm.Engine.Assignments as assignments
+from ... import Utilities as utils
+from .. import Assignments as assignments
 
 class LocalIO():
     """
