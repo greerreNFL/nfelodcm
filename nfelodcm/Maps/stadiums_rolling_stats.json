@@ -1,7 +1,6 @@
 {
   "name": "team_stadiums_rolling_stats",
   "description": "Rolling HFA stats for the NFL",
-  "last_local_update": "2025-09-08T04:57:58.670196",
   "download_url": "https://raw.githubusercontent.com/greerreNFL/Stadiums/refs/heads/main/data/rolling_league_hfa.csv",
   "compression": null,
   "engine": "c",
@@ -9,8 +8,7 @@
     "type": "gh_commit",
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/Stadiums/commits?path=data/rolling_league_hfa.csv",
     "gh_release_tag": null,
-    "sla_seconds": 900,
-    "last_freshness_check": "2025-09-08T04:57:58.445724+00:00"
+    "sla_seconds": 900
   },
   "iter": {
     "type": null,

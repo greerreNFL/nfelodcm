@@ -1,19 +1,16 @@
 import pandas as pd
-import pathlib
 import time
 
 from .nfelodcm import get_df
+from .Utilities.paths import MAPS_DIR
 
 def test_all_maps():
     '''
     Attempts to load all maps
     '''
     print('Testing all available maps')
-    map_loc = '{0}/Maps'.format(
-        pathlib.Path(__file__).parent.resolve()
-    )
     maps = []
-    for f in pathlib.Path(map_loc).iterdir():
+    for f in MAPS_DIR.iterdir():
         if f.is_file() and f.suffix == ".json":
             maps.append(f.stem)
     print('     Found {0} maps'.format(len(maps)))
@@ -34,5 +31,3 @@ def test_all_maps():
             print('          2nd load completed in {0} seconds'.format(round(
                 l2_end-l2_start,3
             )))
-
-

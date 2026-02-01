@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy
-import pathlib
 import datetime
 
 from .Primatives import TableMap, Freshness, DataPull, LocalIO
-import nfelodcm.nfelodcm.Utilities as utils
+from nfelodcm.nfelodcm.Utilities.paths import table_state_path
+from nfelodcm.nfelodcm.Engine.Types import TableState
 
 class DCMTable():
     """
@@ -12,11 +12,18 @@ class DCMTable():
     """
     def __init__(self, table):
         self.table = table
-        ## init table map ##
+        ## init table map (read-only config) ##
         self.tableMap = TableMap(self.table)
         self.check_table_map()
-        ## init freshness ##
-        self.freshness = Freshness(self.tableMap.config)
+        ## init table state (mutable) ##
+        self.state_path = table_state_path(self.table)
+        self.tableState = TableState.load(self.state_path)
+        ## init freshness, passing state values ##
+        self.freshness = Freshness(
+            self.tableMap.config,
+            last_freshness_check=self.tableState.last_freshness_check,
+            last_local_update=self.tableState.last_local_update
+        )
         ## init data pull ##
         self.dataPull = DataPull(self.tableMap.config)
         ## init local io ##
@@ -26,22 +33,14 @@ class DCMTable():
 
     def check_table_map(self):
         """
-        Checks to ensure the structure of the table map config and data types 
+        Checks to ensure the structure of the table map config and data types
         are valid
         """
-        ##
-        config_passes, config_errors = utils.check_struc(self.tableMap.config)
-        if not config_passes:
+        passing, errors = self.tableMap.config.validate()
+        if not passing:
             raise ValueError(
-                "Config structure is not valid. Errors: \n     -> " +
-                '\n     -> '.join([err['error_msg'] for err in config_errors])
-            )
-        ## check map ##
-        map_passes, map_errors = utils.check_map_type(self.tableMap.config['map'])
-        if not map_passes:
-            raise ValueError(
-                "Map had data type errors. Errors: \n     -> " +
-                '\n     -> '.join([err['error_msg'] for err in map_errors])
+                "Config validation failed. Errors: \n     -> " +
+                '\n     -> '.join([err['error_msg'] for err in errors])
             )
 
 
@@ -56,11 +55,9 @@ class DCMTable():
             ## if the csv does not exist, flag the update flag ##
             self.freshness.needs_update=True
         if self.freshness.freshness_check_time is not None:
-            ## if freshness was checked, update the time in the config ##
-            self.tableMap.config['freshness']['last_freshness_check'] = self.freshness.freshness_check_time
-            self.tableMap.update_map(
-                self.tableMap.config
-            )
+            ## if freshness was checked, update the time in state ##
+            self.tableState.last_freshness_check = self.freshness.freshness_check_time
+            self.tableState.save(self.state_path)
         ## reference freshness to determine where to pull data from ##
         if self.freshness.needs_update:
             ## pull new data ##
@@ -69,10 +66,10 @@ class DCMTable():
             self.localIO.df = self.dataPull.pulled_df
             ## write ##
             self.localIO.write()
-            ## update config timestamp with a UTC iso timestamp ##
-            self.tableMap.config['last_local_update'] = datetime.datetime.utcnow().isoformat()
-            self.tableMap.update_map(
-                self.tableMap.config
-            )
+            ## update state timestamp with a UTC iso timestamp ##
+            ## use datetime.now(datetime.timezone.utc) to ensure we also write the timezone offset, so
+            ## operations that use the timestamp are not ambiguous (ie read it as local time b/c there is no offset)
+            self.tableState.last_local_update = datetime.datetime.now(datetime.timezone.utc).isoformat()
+            self.tableState.save(self.state_path)
         else:
             self.localIO.read()

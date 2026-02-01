@@ -1,33 +1,32 @@
 import requests
 import datetime
-import pathlib
-import json
+
+from nfelodcm.nfelodcm.Utilities.paths import SEASON_STATE_JSON
+from nfelodcm.nfelodcm.Engine.Types import SeasonState
 
 class Freshness():
     """
     Determines whether or not a data update is required
     """
-    
-    def __init__(self, config):
+
+    def __init__(self, config, last_freshness_check=None, last_local_update=None):
         self.config = config
+        self.last_freshness_check = last_freshness_check
+        self.last_local_update = last_local_update
         self.needs_update = False
         self.freshness_check_time = None
         self.check_freshness()
-        
-    ## helpers ##  
+
+    ## helpers ##
     def determine_current_season(self):
         """
-        Loads the current season from global variables
+        Loads the current season from season state
         """
-        ## container for current seaosn ##
-        season = None
-        ## load global_variables.json ##
-        with open('{0}/Utilities/global_variables.json'.format(pathlib.Path(__file__).parent.parent.parent.resolve()), 'r') as fp:
-            global_variables = json.load(fp)
-            season = global_variables['season_states']['last_full_week']['season']
-        ## return ##
-        return season
-        
+        state = SeasonState.load(SEASON_STATE_JSON)
+        if state.last_full_week is not None:
+            return state.last_full_week.get('season')
+        return None
+
     def form_season_iter_download_url(self, download_url):
         """
         If the dataset is a season iter, formulate the dl link based on current seaosn
@@ -37,34 +36,34 @@ class Freshness():
         if year is None:
             raise ValueError('ERROR: Could not determine current season.')
         return download_url.format(year)
-    
+
     ## primary SLA check ##
     def sla_check(self):
         """
-        Checks SLA seconds and the last update timestamp from the config, to determine if
+        Checks SLA seconds and the last update timestamp from state, to determine if
         a freshness check is needed, or if the data is still within its SLA
         """
         ## fails SLA if null ##
-        if self.config['freshness']['last_freshness_check'] is None or self.config['freshness']['sla_seconds'] is None:
+        if self.last_freshness_check is None or self.config.freshness.sla_seconds is None:
             ## either freshness was never previously established or there is no SLA and freshness should be checked ##
             return False
         else:
             ## get seconds since last freshness check ##
             last_freshness_check = datetime.datetime.fromisoformat(
-                self.config['freshness']['last_freshness_check']
+                self.last_freshness_check
             ).astimezone(datetime.timezone.utc)
             seconds_since_last_check = (
                 datetime.datetime.now(datetime.timezone.utc) -
                 last_freshness_check
             ).total_seconds()
             ## compare to sla ##
-            if seconds_since_last_check > self.config['freshness']['sla_seconds']:
+            if seconds_since_last_check > self.config.freshness.sla_seconds:
                 ## if freshness state breaches SLA, update freshness
                 return False
             else:
                 ## if the time since the last check is less than the SLA, then it passes
                 return True
-    
+
     ## config types ##
     def check_gh_release_freshness(self):
         """
@@ -108,7 +107,7 @@ class Freshness():
                         return
             ## if nothing has been returned, return None ##
             print('WARN: No asset matched {0}.'.format(public_download_url))
-        
+
         def check_for_new_gh_data(last_local_update, github_endpoint, tag, public_download_url):
             ## Compares the last update of the local file to the last update of the
             ## release asset on github to determine if new data is available.
@@ -126,18 +125,18 @@ class Freshness():
                 ## if gh update is newer, return True signal download ##
                 return True
             return False
-            
+
         ## handle request for GH Release freshness ##
-        github_endpoint = self.config['freshness'].get('gh_api_endpoint')
-        tag = self.config['freshness'].get('gh_release_tag')
-        download_url = self.config.get('download_url')
-        if tag is None or download_url is None or github_endpoint is None:
+        github_endpoint = self.config.freshness.gh_api_endpoint
+        tag = self.config.freshness.gh_release_tag
+        download_url = self.config.download_url
+        if not tag or not download_url or not github_endpoint:
             raise ValueError('ERROR: Tag, Endpoint, and Download URL must be included in a Github Release Map')
         ## get url of most recent season file if iter ##
-        if self.config['iter']['type'] is not None:
-            if self.config['iter']['type'] == 'season':
+        if self.config.iter.type is not None:
+            if self.config.iter.type == 'season':
                 download_url = self.form_season_iter_download_url(download_url)
-        last_local_update = self.config.get('last_local_update')
+        last_local_update = self.last_local_update
         ## check last GH update ##
         self.needs_update = check_for_new_gh_data(
             last_local_update,
@@ -145,7 +144,7 @@ class Freshness():
             tag,
             download_url
         )
-        
+
     def check_gh_commit_freshness(self):
         """
         Checks the freshness of a map with a github commit source.
@@ -176,7 +175,7 @@ class Freshness():
                 )
             ## return ##
             return max(commits)
-        
+
         def check_for_new_gh_data(last_local_update, endpoint):
             ## Compares the last update of the local file to the last update of the
             ## commit on github to determine if new data is available.
@@ -194,18 +193,18 @@ class Freshness():
                 ## if gh update is newer, return True signal download ##
                 return True
             return False
-        
+
         ## handle request for GH Commit freshness ##
-        github_endpoint = self.config['freshness'].get('gh_api_endpoint')
-        if github_endpoint is None:
+        github_endpoint = self.config.freshness.gh_api_endpoint
+        if not github_endpoint:
             raise ValueError('ERROR: Endpoint must be included in a Github Commit Map')
-        last_local_update = self.config.get('last_local_update')
+        last_local_update = self.last_local_update
         ## check last GH update ##
         self.needs_update = check_for_new_gh_data(
             last_local_update,
             github_endpoint
         )
-    
+
     def check_freshness(self):
         """
         Wrapper function that checks data freshness for a map given a freshness config.
@@ -215,9 +214,9 @@ class Freshness():
         ## update if it is not passing ##
         if not sla_passing:
             ## check the data type and route to appropriate function ##
-            if self.config['freshness']['type'] == 'gh_release':
+            if self.config.freshness.type == 'gh_release':
                 self.check_gh_release_freshness()
-            elif self.config['freshness']['type'] == 'gh_commit':
+            elif self.config.freshness.type == 'gh_commit':
                 self.check_gh_commit_freshness()
             else:
                 raise ValueError('ERROR: Freshness type not recognized.')

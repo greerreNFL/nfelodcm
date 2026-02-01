@@ -1,7 +1,8 @@
 ## built-in ##
-import pathlib
 import json
 from typing import Dict
+
+from .paths import MAPS_DIR
 
 def load_maps() -> Dict[str, Dict]:
     '''
@@ -16,8 +17,7 @@ def load_maps() -> Dict[str, Dict]:
     ## container for maps ##
     maps = {}
     ## get maps ##
-    maps_dir = pathlib.Path(__file__).parent.parent.resolve() / 'Maps'
-    existing_maps = list(maps_dir.glob('*.json'))
+    existing_maps = list(MAPS_DIR.glob('*.json'))
     ## check that maps were found ##
     if len(existing_maps) > 0:
         for map_path in existing_maps:

@@ -1,7 +1,6 @@
 {
   "name": "market_data",
   "description": "Spread and totals from various sources",
-  "last_local_update": "2025-09-08T04:58:00.303211",
   "download_url": "https://raw.githubusercontent.com/greerreNFL/nfelomarket_data/main/Data/lines.csv",
   "compression": null,
   "engine": "c",
@@ -9,8 +8,7 @@
     "type": "gh_commit",
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelomarket_data/commits?path=Data/lines.csv",
     "gh_release_tag": null,
-    "sla_seconds": 900,
-    "last_freshness_check": "2025-09-08T04:57:59.659819+00:00"
+    "sla_seconds": 900
   },
   "iter": {
     "type": null,

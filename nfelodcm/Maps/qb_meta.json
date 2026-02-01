@@ -1,7 +1,6 @@
 {
   "name": "qb_meta",
   "description": "nflfastR qb meta data that maps elo to fastr datasets",
-  "last_local_update": "2025-09-08T04:57:59.291311",
   "download_url": "https://raw.githubusercontent.com/greerreNFL/nfeloqb/refs/heads/main/Other%20Data/meta_data.csv",
   "compression": null,
   "engine": "c",
@@ -9,8 +8,7 @@
     "type": "gh_commit",
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfeloqb/commits?path=Other%20Data/meta_data.csv",
     "gh_release_tag": null,
-    "sla_seconds": 900,
-    "last_freshness_check": "2025-09-08T04:57:58.965531+00:00"
+    "sla_seconds": 900
   },
   "iter": {
     "type": null,

@@ -13,7 +13,7 @@ class LocalIO():
     
     def __init__(self, config, data_location):
         self.config = config
-        self.columns, self.dtypes = utils.extract_map(config['map'])
+        self.columns, self.dtypes = utils.extract_map(config.map)
         self.data_location = data_location
         self.df = None
         self.add_assignment_cols()
@@ -22,7 +22,7 @@ class LocalIO():
         """
         Add columns to the dataframe based on the assignments in the config
         """
-        for assignment in self.config['assignments']:
+        for assignment in self.config.assignments:
             cols_added = assignments.assignment_columns_added(assignment)
             for col in cols_added:
                 if col[0] not in self.columns:
@@ -41,7 +41,7 @@ class LocalIO():
         cols int eh config
         """
         ## parse config cols ##
-        config_cols = list(self.config['map'].keys())
+        config_cols = list(self.config.map.keys())
         ## parse local cols ##
         local_cols = []
         if self.local_exists():
@@ -73,7 +73,7 @@ class LocalIO():
             self.data_location,
             usecols=self.columns,
             dtype=self.dtypes,
-            engine=self.config['engine']
+            engine=self.config.engine
         )
         
     def write(self):

@@ -1,7 +1,6 @@
 {
   "name": "player_stats",
   "description": "nflfastR player stats",
-  "last_local_update": "2025-09-08T04:57:54.785071",
   "download_url": "https://github.com/nflverse/nflverse-data/releases/download/stats_player/stats_player_week_{0}.csv.gz",
   "compression": "gzip",
   "engine": "c",
@@ -9,8 +8,7 @@
     "type": "gh_release",
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
     "gh_release_tag": "stats_player",
-    "sla_seconds": 900,
-    "last_freshness_check": "2025-09-08T04:55:34.980735+00:00"
+    "sla_seconds": 900
   },
   "iter": {
     "type": "season",

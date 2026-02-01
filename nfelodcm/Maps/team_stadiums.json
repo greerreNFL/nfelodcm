@@ -1,7 +1,6 @@
 {
   "name": "team_stadiums",
   "description": "Metadata and analytics for NFL teams and their stadiums",
-  "last_local_update": "2025-09-08T04:49:30.992529",
   "download_url": "https://raw.githubusercontent.com/greerreNFL/Stadiums/refs/heads/main/data/team_stadiums.csv",
   "compression": null,
   "engine": "c",
@@ -9,8 +8,7 @@
     "type": "gh_commit",
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/Stadiums/commits?path=data/team_stadiums.csv",
     "gh_release_tag": null,
-    "sla_seconds": 900,
-    "last_freshness_check": "2025-09-08T04:49:30.756657+00:00"
+    "sla_seconds": 900
   },
   "iter": {
     "type": null,

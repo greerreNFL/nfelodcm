@@ -1,19 +1,16 @@
-import json
-import pathlib
+from .paths import SEASON_STATE_JSON
+from nfelodcm.nfelodcm.Engine.Types import SeasonState
 
-## reads global variables and returns values ##
+## reads season state and returns values ##
 
 def current_season(type="last_full_week"):
-    """ 
+    """
     Returns the current season
     """
-    global_variables = None
-    with open('{0}/global_variables.json'.format(pathlib.Path(__file__).parent.resolve()), 'r') as fp:
-        ## load config ##
-        global_variables = json.load(fp)
-    
+    state = SeasonState.load(SEASON_STATE_JSON)
+    state_dict = state.to_dict()
     ## return ##
-    if type in global_variables['season_states']:
-        return global_variables['season_states'][type]['season']
+    if type in state_dict:
+        return state_dict[type]['season']
     else:
         raise ValueError('Invalid season type: {0}'.format(type))

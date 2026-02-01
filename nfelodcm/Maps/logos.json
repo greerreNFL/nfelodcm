@@ -1,7 +1,6 @@
 {
   "name": "logos",
   "description": "nflfastr logos",
-  "last_local_update": "2024-07-07T23:35:10.755659",
   "download_url": "https://raw.githubusercontent.com/nflverse/nflverse-pbp/master/teams_colors_logos.csv",
   "compression": null,
   "engine": "c",
@@ -9,8 +8,7 @@
     "type": "gh_commit",
     "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-pbp/commits?path=teams_colors_logos.csv",
     "gh_release_tag": null,
-    "sla_seconds": 900,
-    "last_freshness_check": "2025-09-08T04:49:30.080423+00:00"
+    "sla_seconds": 900
   },
   "iter": {
     "type": null,

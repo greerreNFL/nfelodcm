@@ -1,6 +1,4 @@
 ## built-in ##
-import pathlib
-import json
 from typing import List, Dict
 ## external ##
 import pandas as pd
@@ -9,9 +7,11 @@ import numpy
 ## local ##
 from .Engine import DCMTable
 import nfelodcm.nfelodcm.Utilities as utils
+from .Utilities.paths import SEASON_STATE_JSON
+from .Engine.Types import SeasonState
 
-## ensure local data folder exists ##
-utils.check_data_folder()
+## ensure local data and state folders exist ##
+utils.ensure_dirs()
 ## init season state on load ##
 utils.set_season_state()
 ## update local data freshness meta as needed ##
@@ -80,18 +80,15 @@ def get_season_state(state_type='last_full_week') -> tuple:
        'last_partual_week': the last week where any game has been played
        'next_week': the first week with no games played
     '''
-    ## open global variables json ##
-    global_variables = None
-    with open('{0}/Utilities/global_variables.json'.format(pathlib.Path(__file__).parent.resolve()), 'r') as fp:
-        ## load config ##
-        global_variables = json.load(fp)
+    state = SeasonState.load(SEASON_STATE_JSON)
+    state_dict = state.to_dict()
     ## check input ##
-    if state_type not in list(global_variables['season_states'].keys()):
+    if state_type not in state_dict:
         raise Exception('UTILITY ERROR: {0} is not an available state_type. Available types: {1}'.format(
-            state_type, '\n     '.join(list(global_variables['season_states'].keys()))
+            state_type, '\n     '.join(list(state_dict.keys()))
         ))
     ## if state valid, return ##
-    return global_variables['season_states'][state_type]['season'], global_variables['season_states'][state_type]['week']
+    return state_dict[state_type]['season'], state_dict[state_type]['week']
 
 def list_tables() -> None:
     '''

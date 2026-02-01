@@ -1,7 +1,6 @@
 {
   "name": "nfelo_games",
   "description": "nfelo projections and components by game",
-  "last_local_update": "2025-09-08T04:51:59.528512",
   "download_url": "https://raw.githubusercontent.com/greerreNFL/nfelo/refs/heads/main/output_data/nfelo_games.csv",
   "compression": null,
   "engine": "c",
@@ -9,8 +8,7 @@
     "type": "gh_commit",
     "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelo/commits?path=output_data/nfelo_games.csv",
     "gh_release_tag": null,
-    "sla_seconds": 900,
-    "last_freshness_check": "2025-09-08T04:51:58.904751+00:00"
+    "sla_seconds": 900
   },
   "iter": {
     "type": null,

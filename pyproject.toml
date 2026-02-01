@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nfelodcm"
-version = "0.1.24"
+version = "0.2.0"
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}
@@ -33,6 +33,9 @@ dependencies = [
     "pandas>=1.5.3",
     "requests",
 ]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
 
 [tool.setuptools]
 packages = ["nfelodcm"]
