@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nfelodcm"
-version = "0.2.0"
+version = "0.2.1"
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}
@@ -32,6 +32,7 @@ dependencies = [
     "wheel",
     "pandas>=1.5.3",
     "requests",
+    "python-dotenv>=1.0",
 ]
 
 [project.optional-dependencies]

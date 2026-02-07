@@ -1,7 +1,7 @@
 import pandas as pd
 
-from .paths import MAPS_DIR, DATA_DIR, table_state_path, ensure_dirs
-from nfelodcm.nfelodcm.Engine.Types import TableState
+from .paths import MAPS_DIR, DATA_DIR, table_state_path, iter_state_path, ensure_dirs
+from nfelodcm.nfelodcm.Engine.Types import TableState, IterState
 
 
 def check_data_folder():
@@ -27,6 +27,11 @@ def check_data():
         ## check for the csv ##
         csv_path = DATA_DIR / '{0}.csv'.format(table)
         if not csv_path.exists():
-            ## if the csv does not exist, reset state ##
+            ## if the csv does not exist, reset table state ##
             state = TableState()
             state.save(table_state_path(table))
+            ## also reset iter state if it exists ##
+            isp = iter_state_path(table)
+            if isp.exists():
+                iter_state = IterState()
+                iter_state.save(isp)

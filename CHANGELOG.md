@@ -1,5 +1,22 @@
 # Changelog
 
+## v0.2.1
+#### Features
+- **GitHub Token Support**: Load `GITHUB_TOKEN` from `.env` file for authenticated API requests, increasing rate limits from 60/hr to 5,000/hr
+- **Per-File Iterative Pulls**: Season-based tables (pbp, rosters, player_stats, etc.) now cache individual season files in `Data/Parts/`. Incremental updates only re-download stale seasons instead of all files, with staleness based on per file release timestamps
+- **Improved Retry Logic**: Shared retry utility with exponential backoff and error classification. 4xx errors fail fast without retry; 5xx and connection errors retry with backoff, ensuring more resilient data retrieval
+
+#### Architecture
+- `DataPull` refactored to atomic unit (single URL → DataFrame)
+- New `PullManager` orchestrates iteration, per-file caching, concatenation, and assignments
+- New `IterState` type tracks per-season timestamps for selective freshness checks
+- `Freshness` now computes `stale_parts` list for `gh_release` iter tables via single API call
+
+#### Dependencies
+- Added `python-dotenv>=1.0` for github token support
+
+---
+
 ## v0.2.0
 #### Features
 - Split local state tracking from the map to its own json so pulling new versions does not override local state and pushes to repo do not create difs on the maps.

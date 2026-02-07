@@ -2,9 +2,9 @@ import pandas as pd
 import numpy
 import datetime
 
-from .Primatives import TableMap, Freshness, DataPull, LocalIO
-from nfelodcm.nfelodcm.Utilities.paths import table_state_path
-from nfelodcm.nfelodcm.Engine.Types import TableState
+from .Primatives import TableMap, Freshness, PullManager, LocalIO
+from nfelodcm.nfelodcm.Utilities.paths import table_state_path, iter_state_path
+from nfelodcm.nfelodcm.Engine.Types import TableState, IterState
 
 class DCMTable():
     """
@@ -18,14 +18,19 @@ class DCMTable():
         ## init table state (mutable) ##
         self.state_path = table_state_path(self.table)
         self.tableState = TableState.load(self.state_path)
-        ## init freshness, passing state values ##
+        ## init iter state for iter tables ##
+        self.iter_state = None
+        if self.tableMap.config.iter.type is not None:
+            self.iter_state = IterState.load(iter_state_path(self.table))
+        ## init freshness, passing state values and iter_state ##
         self.freshness = Freshness(
             self.tableMap.config,
             last_freshness_check=self.tableState.last_freshness_check,
-            last_local_update=self.tableState.last_local_update
+            last_local_update=self.tableState.last_local_update,
+            iter_state=self.iter_state
         )
-        ## init data pull ##
-        self.dataPull = DataPull(self.tableMap.config)
+        ## init pull manager (replaces DataPull for orchestration) ##
+        self.pullManager = PullManager(self.tableMap.config, iter_state=self.iter_state)
         ## init local io ##
         self.localIO = LocalIO(self.tableMap.config, self.tableMap.table_data_location)
         ## handle load ##
@@ -43,7 +48,6 @@ class DCMTable():
                 '\n     -> '.join([err['error_msg'] for err in errors])
             )
 
-
     def handle_load(self):
         """
         Handles loading of the table based on freshness status.
@@ -60,10 +64,10 @@ class DCMTable():
             self.tableState.save(self.state_path)
         ## reference freshness to determine where to pull data from ##
         if self.freshness.needs_update:
-            ## pull new data ##
-            self.dataPull.update_data()
+            ## pull new data, passing stale_parts for selective iter pulls ##
+            self.pullManager.update_data(stale_parts=self.freshness.stale_parts)
             ## load into local io ##
-            self.localIO.df = self.dataPull.pulled_df
+            self.localIO.df = self.pullManager.pulled_df
             ## write ##
             self.localIO.write()
             ## update state timestamp with a UTC iso timestamp ##

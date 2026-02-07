@@ -71,6 +71,7 @@ class LocalIO():
             raise Exception('IO ERROR: Attempting read a local CSV that does not exist')
         self.df = pd.read_csv(
             self.data_location,
+            index_col=0,
             usecols=self.columns,
             dtype=self.dtypes,
             engine=self.config.engine
