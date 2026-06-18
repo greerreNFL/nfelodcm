@@ -1,20 +1,20 @@
 [build-system]
-requires = ["setuptools","wheel","pandas","requests"]
+requires = ["setuptools>=67.6.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "nfelodcm"
-version = "0.2.1"
+version = "0.2.2"
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}
 
 authors = [
-    {name = "Robert Greer", email="nfl@robbygreer.com"}
+    {name = "Robert Greer", email="70054621+greerreNFL@users.noreply.github.com"}
 ]
 
 maintainers = [
-    {name = "Robert Greer", email="nfl@robbygreer.com"}
+    {name = "Robert Greer", email="70054621+greerreNFL@users.noreply.github.com"}
 ]
 
 description = "Python package for loading and caching CSVs hosted on github into pandas dataframes"
@@ -24,13 +24,12 @@ keywords = ['nfl','nflfastR','nfelo']
 classifiers = [
     'Programming Language :: Python',
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.10'
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12'
 ]
 
 dependencies = [
-    "setuptools>=67.6.0",
-    "wheel",
-    "pandas>=1.5.3",
+    "pandas>=1.5",
     "requests",
     "python-dotenv>=1.0",
 ]

@@ -1,0 +1,41 @@
+{
+  "name": "nfelounits_value_created",
+  "description": "Season-to-date expanding average of per-game value created by unit (ValueCreatedProcessor): observed EPA minus opponent- and context-adjusted expectation; positive means outperformance. Descriptive performance metric (not the predictive EWMA unit rating). Includes week-aware era normalization (_norm_) and percentiles (_ptile_); bye weeks forward-filled.",
+  "download_url": "https://raw.githubusercontent.com/greerreNFL/nfelounits/refs/heads/main/Output/value_created.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_commit",
+    "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelounits/commits?path=Output/value_created.csv",
+    "gh_release_tag": null,
+    "sla_seconds": 900
+  },
+  "iter": {
+    "type": null,
+    "start": null
+  },
+  "assignments": [],
+  "map": {
+    "season": "int32",
+    "week": "int32",
+    "team": "object",
+    "pass_off_value_created": "float32",
+    "pass_off_norm_value_created": "float32",
+    "pass_off_ptile_created": "float32",
+    "pass_def_value_created": "float32",
+    "pass_def_norm_value_created": "float32",
+    "pass_def_ptile_created": "float32",
+    "rush_off_value_created": "float32",
+    "rush_off_norm_value_created": "float32",
+    "rush_off_ptile_created": "float32",
+    "rush_def_value_created": "float32",
+    "rush_def_norm_value_created": "float32",
+    "rush_def_ptile_created": "float32",
+    "st_off_value_created": "float32",
+    "st_off_norm_value_created": "float32",
+    "st_off_ptile_created": "float32",
+    "st_def_value_created": "float32",
+    "st_def_norm_value_created": "float32",
+    "st_def_ptile_created": "float32"
+  }
+}

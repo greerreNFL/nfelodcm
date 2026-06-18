@@ -1,0 +1,41 @@
+{
+  "name": "nfelounits_units",
+  "description": "Predictive pass/rush/ST offense and defense unit ratings (pre- and post-game EPA vs average) from nfelounits (UnitTeamsProcessor), plus rolled-up off_value, def_value, and total_value. EWMA-smoothed ratings tuned for forecasting; one row per season/week/team with bye weeks forward-filled.",
+  "download_url": "https://raw.githubusercontent.com/greerreNFL/nfelounits/refs/heads/main/Output/units.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_commit",
+    "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelounits/commits?path=Output/units.csv",
+    "gh_release_tag": null,
+    "sla_seconds": 900
+  },
+  "iter": {
+    "type": null,
+    "start": null
+  },
+  "assignments": [],
+  "map": {
+    "season": "int32",
+    "week": "int32",
+    "team": "object",
+    "pass_off_value_pre": "float32",
+    "rush_off_value_pre": "float32",
+    "st_off_value_pre": "float32",
+    "pass_def_value_pre": "float32",
+    "rush_def_value_pre": "float32",
+    "st_def_value_pre": "float32",
+    "pass_off_value_post": "float32",
+    "rush_off_value_post": "float32",
+    "st_off_value_post": "float32",
+    "pass_def_value_post": "float32",
+    "rush_def_value_post": "float32",
+    "st_def_value_post": "float32",
+    "off_value_pre": "float32",
+    "def_value_pre": "float32",
+    "total_value_pre": "float32",
+    "off_value_post": "float32",
+    "def_value_post": "float32",
+    "total_value_post": "float32"
+  }
+}

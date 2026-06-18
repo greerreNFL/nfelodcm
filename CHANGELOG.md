@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.2.2
+#### Patch
+- **Local CSV index fix**: Removed `index_col=0` from local and iter-part cache reads so the first mapped column (e.g. `game_id`) is no longer promoted to the index. Local and part cache writes now use `index=False` for consistent round-trips.
+
+#### Features
+- **nfelounits maps**: Added maps for all five `nfelounits` Output tables — `nfelounits_elo`, `nfelounits_units`, `nfelounits_units_normalized`, `nfelounits_value_created`, and `nfelounits_faced` (no assignments; source data is already team-week shaped)
+- **CI**: GitHub Actions workflow runs the test suite on push/PR to `main`
+
+#### Dependencies
+- Cleaned up `pyproject.toml` build vs runtime dependencies; classifiers updated for Python 3.11 and 3.12
+
+---
+
 ## v0.2.1
 #### Features
 - **GitHub Token Support**: Load `GITHUB_TOKEN` from `.env` file for authenticated API requests, increasing rate limits from 60/hr to 5,000/hr

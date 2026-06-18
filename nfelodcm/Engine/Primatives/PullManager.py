@@ -31,7 +31,7 @@ class PullManager():
         self.parts_dir.mkdir(parents=True, exist_ok=True)
         ## write to parts cache (raw, pre-assignment) ##
         cache_path = self.parts_dir / '{0}.csv'.format(season)
-        df.to_csv(cache_path)
+        df.to_csv(cache_path, index=False)
         return df
 
     def read_cached_part(self, season):
@@ -45,7 +45,6 @@ class PullManager():
         try:
             df = pd.read_csv(
                 cache_path,
-                index_col=0,
                 usecols=self.dataPull.columns,
                 dtype=self.dataPull.dtypes,
                 engine=self.config.engine

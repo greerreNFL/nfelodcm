@@ -1,0 +1,26 @@
+{
+  "name": "nfelounits_elo",
+  "description": "Pre-game composite Elo rating and QB adjustment in Elo points from nfelounits (EloProcessor). One row per season/week/team with game_id when played; bye and idle weeks forward-filled from the team's last game.",
+  "download_url": "https://raw.githubusercontent.com/greerreNFL/nfelounits/refs/heads/main/Output/elo.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_commit",
+    "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelounits/commits?path=Output/elo.csv",
+    "gh_release_tag": null,
+    "sla_seconds": 900
+  },
+  "iter": {
+    "type": null,
+    "start": null
+  },
+  "assignments": [],
+  "map": {
+    "season": "int32",
+    "week": "int32",
+    "team": "object",
+    "game_id": "object",
+    "elo": "float32",
+    "qb_adj": "float32"
+  }
+}

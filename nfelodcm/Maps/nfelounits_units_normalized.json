@@ -1,0 +1,47 @@
+{
+  "name": "nfelounits_units_normalized",
+  "description": "Era-adjusted unit ratings derived from units.csv (UnitTeamsNormalizationProcessor). Each pass/rush/ST off/def pre/post value is z-scored within a rolling era window and re-scaled to the 2015 week-1 reference distribution, with within-era percentile ranks (_ptile_) for cross-era comparison.",
+  "download_url": "https://raw.githubusercontent.com/greerreNFL/nfelounits/refs/heads/main/Output/units_normalized.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_commit",
+    "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelounits/commits?path=Output/units_normalized.csv",
+    "gh_release_tag": null,
+    "sla_seconds": 900
+  },
+  "iter": {
+    "type": null,
+    "start": null
+  },
+  "assignments": [],
+  "map": {
+    "season": "int32",
+    "week": "int32",
+    "team": "object",
+    "pass_off_norm_value_pre": "float32",
+    "pass_off_ptile_pre": "float32",
+    "rush_off_norm_value_pre": "float32",
+    "rush_off_ptile_pre": "float32",
+    "st_off_norm_value_pre": "float32",
+    "st_off_ptile_pre": "float32",
+    "pass_def_norm_value_pre": "float32",
+    "pass_def_ptile_pre": "float32",
+    "rush_def_norm_value_pre": "float32",
+    "rush_def_ptile_pre": "float32",
+    "st_def_norm_value_pre": "float32",
+    "st_def_ptile_pre": "float32",
+    "pass_off_norm_value_post": "float32",
+    "pass_off_ptile_post": "float32",
+    "rush_off_norm_value_post": "float32",
+    "rush_off_ptile_post": "float32",
+    "st_off_norm_value_post": "float32",
+    "st_off_ptile_post": "float32",
+    "pass_def_norm_value_post": "float32",
+    "pass_def_ptile_post": "float32",
+    "rush_def_norm_value_post": "float32",
+    "rush_def_ptile_post": "float32",
+    "st_def_norm_value_post": "float32",
+    "st_def_ptile_post": "float32"
+  }
+}

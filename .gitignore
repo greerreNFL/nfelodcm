@@ -5,3 +5,5 @@ __pycache__/
 .claude/
 .pytest_cache/
 nfelodcm/State/*/*.json
+.env
+*.egg-info/

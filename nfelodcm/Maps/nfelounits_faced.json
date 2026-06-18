@@ -1,0 +1,41 @@
+{
+  "name": "nfelounits_faced",
+  "description": "Season-to-date expanding average opponent quality faced by unit (OpponentFacedProcessor): offense faces opponent defense minus context; defense faces opponent offense plus QB/HFA/weather context; positive means a harder schedule. Includes week-aware era normalization (_norm_) and percentiles (_ptile_); bye weeks forward-filled.",
+  "download_url": "https://raw.githubusercontent.com/greerreNFL/nfelounits/refs/heads/main/Output/faced.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_commit",
+    "gh_api_endpoint": "https://api.github.com/repos/greerreNFL/nfelounits/commits?path=Output/faced.csv",
+    "gh_release_tag": null,
+    "sla_seconds": 900
+  },
+  "iter": {
+    "type": null,
+    "start": null
+  },
+  "assignments": [],
+  "map": {
+    "season": "int32",
+    "week": "int32",
+    "team": "object",
+    "pass_off_faced": "float32",
+    "pass_off_norm_faced": "float32",
+    "pass_off_ptile_faced": "float32",
+    "pass_def_faced": "float32",
+    "pass_def_norm_faced": "float32",
+    "pass_def_ptile_faced": "float32",
+    "rush_off_faced": "float32",
+    "rush_off_norm_faced": "float32",
+    "rush_off_ptile_faced": "float32",
+    "rush_def_faced": "float32",
+    "rush_def_norm_faced": "float32",
+    "rush_def_ptile_faced": "float32",
+    "st_off_faced": "float32",
+    "st_off_norm_faced": "float32",
+    "st_off_ptile_faced": "float32",
+    "st_def_faced": "float32",
+    "st_def_norm_faced": "float32",
+    "st_def_ptile_faced": "float32"
+  }
+}
