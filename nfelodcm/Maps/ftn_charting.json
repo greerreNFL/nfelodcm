@@ -1,0 +1,52 @@
+{
+  "name": "ftn_charting",
+  "description": "FTN Data play charting via nflverse (formations, motion, pressure, and pass outcomes)",
+  "download_url": "https://github.com/nflverse/nflverse-data/releases/download/ftn_charting/ftn_charting_{0}.csv",
+  "compression": null,
+  "engine": "c",
+  "freshness": {
+    "type": "gh_release",
+    "gh_api_endpoint": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags",
+    "gh_release_tag": "ftn_charting",
+    "sla_seconds": 900
+  },
+  "iter": {
+    "type": "season",
+    "start": 2022,
+    "accept_partial": true
+  },
+  "assignments": [
+    "nflverse_game_id_repl"
+  ],
+  "map": {
+    "ftn_game_id": "int32",
+    "nflverse_game_id": "object",
+    "season": "int32",
+    "week": "int32",
+    "ftn_play_id": "int32",
+    "nflverse_play_id": "int32",
+    "starting_hash": "object",
+    "qb_location": "object",
+    "n_offense_backfield": "float32",
+    "n_defense_box": "float32",
+    "is_no_huddle": "boolean",
+    "is_motion": "boolean",
+    "is_play_action": "boolean",
+    "is_screen_pass": "boolean",
+    "is_rpo": "boolean",
+    "is_trick_play": "boolean",
+    "is_qb_out_of_pocket": "boolean",
+    "is_interception_worthy": "boolean",
+    "is_throw_away": "boolean",
+    "read_thrown": "object",
+    "is_catchable_ball": "boolean",
+    "is_contested_ball": "boolean",
+    "is_created_reception": "boolean",
+    "is_drop": "boolean",
+    "is_qb_sneak": "boolean",
+    "n_blitzers": "float32",
+    "n_pass_rushers": "float32",
+    "is_qb_fault_sack": "boolean",
+    "date_pulled": "object"
+  }
+}

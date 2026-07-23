@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.2.21
+#### Patch
+- **ftn_charting map**: Added nflverse FTN charting (`ftn_charting` release).
+
+
+---
+
 ## v0.2.2
 #### Patch
 - **Local CSV index fix**: Removed `index_col=0` from local and iter-part cache reads so the first mapped column (e.g. `game_id`) is no longer promoted to the index. Local and part cache writes now use `index=False` for consistent round-trips.

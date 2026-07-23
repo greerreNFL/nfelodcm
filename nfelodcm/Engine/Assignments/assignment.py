@@ -1,6 +1,6 @@
 from .assignments import (
-    fastr_team_id_repl, penalty_formatting, desc_based_plays,
-    score_clean, fix_elo_qb_names, fix_fastr_qb_names,
+    fastr_team_id_repl, nflverse_game_id_repl, penalty_formatting,
+    desc_based_plays, score_clean, fix_elo_qb_names, fix_fastr_qb_names,
     temp_players_handle, player_stats_repl
 )
 
@@ -8,6 +8,10 @@ from .assignments import (
 assignments = {
     'fastr_team_id_repl' : {
         'func' : fastr_team_id_repl,
+        'new_columns' : []
+    },
+    'nflverse_game_id_repl' : {
+        'func' : nflverse_game_id_repl,
         'new_columns' : []
     },
     'penalty_formatting' : {

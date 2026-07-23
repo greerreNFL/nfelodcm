@@ -1,12 +1,6 @@
-import pandas as pd
+from ..resources.team_id_map import FASTR_TO_LEGACY_TEAM
 
 ## assignment functions that replaces fastr team names with legacy team names ##
-repl = {
-    'LV' : 'OAK',
-    'SD' : 'LAC',
-    'STL' : 'LAR',
-    'LA' : 'LAR',
-}
 
 def team_id_repl(df):
     """
@@ -22,7 +16,7 @@ def team_id_repl(df):
         'draft_team', 'draft_club', 'team'
     ]:
         if col in df.columns:
-            df[col] = df[col].replace(repl)
+            df[col] = df[col].replace(FASTR_TO_LEGACY_TEAM)
     ## if game if is also in the DF, replace it
     if 'game_id' in df.columns:
         ## id col ##
