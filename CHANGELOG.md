@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.2.22
+#### Patch
+- **qbelo map**: Added `starter_certainty`.
+
+
+---
+
 ## v0.2.21
 #### Patch
 - **ftn_charting map**: Added nflverse FTN charting (`ftn_charting` release).

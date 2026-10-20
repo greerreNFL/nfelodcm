@@ -53,6 +53,7 @@
     "quality": "float32",
     "importance": "float32",
     "total_rating": "float32",
+    "starter_certainty": "float32",
     "game_type": "object"
   }
 }
