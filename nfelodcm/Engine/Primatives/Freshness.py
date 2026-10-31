@@ -1,9 +1,8 @@
 import requests
 import datetime
 
-from nfelodcm.nfelodcm.Utilities.paths import SEASON_STATE_JSON
 from nfelodcm.nfelodcm.Utilities.env import get_github_headers
-from nfelodcm.nfelodcm.Engine.Types import SeasonState
+from nfelodcm.nfelodcm.Engine.Storage import DCMStorage
 from .Retry import with_retry
 
 class Freshness():
@@ -26,10 +25,7 @@ class Freshness():
         """
         Loads the current season from season state
         """
-        state = SeasonState.load(SEASON_STATE_JSON)
-        if state.last_full_week is not None:
-            return state.last_full_week.get('season')
-        return None
+        return DCMStorage.get_season_state().last_full_week['season']
 
     def form_season_iter_download_url(self, download_url):
         """
@@ -155,9 +151,8 @@ class Freshness():
         is_iter = self.config.iter.type is not None and self.config.iter.type == 'season'
         if is_iter and self.iter_state is not None:
             ## per-part freshness: compare each season's asset against iter_state ##
-            from nfelodcm.nfelodcm.Utilities.retrieve_season_state import current_season
             stale = []
-            for season in range(self.config.iter.start, current_season() + 1):
+            for season in range(self.config.iter.start, self.determine_current_season() + 1):
                 ## form the download url for this season ##
                 season_url = download_url.format(season)
                 ## get the remote timestamp for this season's asset ##

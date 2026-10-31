@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from nfelodcm.nfelodcm.Utilities.paths import map_path, data_path
+from nfelodcm.nfelodcm.Utilities.paths import map_path
 from nfelodcm.nfelodcm.Engine.Types import TableConfig
 
 class TableMap():
@@ -10,7 +10,6 @@ class TableMap():
     def __init__(self, table):
         self.table = table
         self.table_map_location = str(map_path(table))
-        self.table_data_location = str(data_path(table))
         self.config = self.load_map()
 
     def load_map(self):

@@ -35,12 +35,12 @@ class TestIterState:
         assert state.get_season_timestamp(2024) == 'ts_value'
 
     def test_round_trip(self, tmp_state_dir):
-        """Save and reload preserves season timestamps"""
+        """Write and reload preserves season timestamps"""
         path = tmp_state_dir / 'iter_state.json'
         state = IterState()
         state.set_season_timestamp(2023, '2025-01-01T00:00:00+00:00')
         state.set_season_timestamp(2024, '2025-06-01T00:00:00+00:00')
-        state.save(path)
+        path.write_text(json.dumps(state.to_dict()))
         loaded = IterState.load(path)
         assert loaded.get_season_timestamp(2023) == '2025-01-01T00:00:00+00:00'
         assert loaded.get_season_timestamp(2024) == '2025-06-01T00:00:00+00:00'

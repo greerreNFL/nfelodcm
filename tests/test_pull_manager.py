@@ -10,6 +10,9 @@ from nfelodcm.nfelodcm.Engine.Types.table_config import (
     TableConfig, FreshnessConfig, IterConfig
 )
 from nfelodcm.nfelodcm.Engine.Types.iter_state import IterState
+from nfelodcm.nfelodcm.Engine.Types.season_state import SeasonState
+
+SEASON_2001 = SeasonState(last_full_week={'season': 2001, 'week': 1})
 
 
 def _make_config(name='test', iter_type=None, iter_start=None, accept_partial=False, assignments=None):
@@ -56,17 +59,15 @@ class TestPullManagerSinglePull:
 
 
 class TestPullManagerIterPull:
-    @patch('nfelodcm.nfelodcm.Engine.Primatives.PullManager.utils.current_season', return_value=2001)
+    @patch('nfelodcm.nfelodcm.Engine.Primatives.PullManager.DCMStorage.write_csv')
+    @patch('nfelodcm.nfelodcm.Engine.Primatives.PullManager.DCMStorage.get_season_state', return_value=SEASON_2001)
     @patch.object(PullManager, '__init__', lambda self, *a, **kw: None)
-    def test_handle_iter_pull_full(self, mock_season):
+    def test_handle_iter_pull_full(self, mock_season, mock_write):
         """Iter table with stale_parts=None pulls all seasons"""
         pm = PullManager.__new__(PullManager)
         pm.config = _make_config(iter_type='season', iter_start=1999)
         pm.iter_state = None
         pm.pulled_df = None
-        pm.parts_dir = MagicMock()
-        pm.parts_dir.mkdir = MagicMock()
-        pm.parts_dir.__truediv__ = lambda self, x: MagicMock()
         ## mock DataPull ##
         mock_dp = MagicMock()
         mock_dp.pull.return_value = _mock_df(1)
@@ -79,17 +80,15 @@ class TestPullManagerIterPull:
         assert pm.pulled_df is not None
         assert len(pm.pulled_df) == 3
 
-    @patch('nfelodcm.nfelodcm.Engine.Primatives.PullManager.utils.current_season', return_value=2001)
+    @patch('nfelodcm.nfelodcm.Engine.Primatives.PullManager.DCMStorage.write_json')
+    @patch('nfelodcm.nfelodcm.Engine.Primatives.PullManager.DCMStorage.get_season_state', return_value=SEASON_2001)
     @patch.object(PullManager, '__init__', lambda self, *a, **kw: None)
-    def test_handle_iter_pull_selective(self, mock_season):
+    def test_handle_iter_pull_selective(self, mock_season, mock_write_json):
         """Iter table with stale_parts=[2001] only pulls that season, reads cache for others"""
         pm = PullManager.__new__(PullManager)
         pm.config = _make_config(iter_type='season', iter_start=1999)
         pm.iter_state = IterState()
         pm.pulled_df = None
-        pm.parts_dir = MagicMock()
-        pm.parts_dir.mkdir = MagicMock()
-        pm.parts_dir.__truediv__ = lambda self, x: MagicMock()
         ## mock DataPull ##
         mock_dp = MagicMock()
         mock_dp.pull.return_value = _mock_df(1)
@@ -100,8 +99,6 @@ class TestPullManagerIterPull:
         pm.read_cached_part = MagicMock(return_value=_mock_df(1))
         ## mock pull_and_cache_part for stale season ##
         pm.pull_and_cache_part = MagicMock(return_value=_mock_df(1))
-        ## mock iter_state.save ##
-        pm.iter_state.save = MagicMock()
         pm.handle_iter_pull(stale_parts=[2001])
         ## should read cache for 1999, 2000 and pull for 2001 ##
         assert pm.read_cached_part.call_count == 2

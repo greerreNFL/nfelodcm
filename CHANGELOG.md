@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.3.0
+#### Features
+- **Storage backends**: Mutable CSVs and JSON state go through one configured backend. Adapters subclass `StorageBackend`. `LocalStorage(root)` at the package root remains the default. `SupabaseStorage` calls the Supabase Storage REST API with the existing `requests` dependency. An optional `prefix` places every object under that folder in the bucket. CSVs are gzip compressed by the adapter and stored as `.csv.gz`. Uploads must finish sending within 120 seconds.
+- **Lazy season state**: Season state is only read or calculated when `get_season_state` or a season-dependent load needs it. A state calculated within the last 30 minutes, in memory or on the active backend, is reused. Otherwise it is recalculated from the games map's download and stored with a `last_updated` timestamp.
+
+#### Breaking
+- Importing `nfelodcm` no longer creates directories, downloads the public games CSV, or reconciles table state.
+- Season state must be read through `get_season_state`, not the `season_state.json` file path. The stored file may be up to 30 minutes old and may not be in the package directory.
+- There is no automatic copy of local files into Supabase. Configure storage before the first data call. `configure` can be called again, and the new backend is reconciled before it becomes active.
+
+---
+
 ## v0.2.22
 #### Patch
 - **qbelo map**: Added `starter_certainty`.

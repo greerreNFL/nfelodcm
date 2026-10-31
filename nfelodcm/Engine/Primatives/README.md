@@ -18,12 +18,18 @@ DCMTable (orchestrator)
     │       │
     │       ├── DataPull ──────── Atomic unit: single URL → DataFrame
     │       │
-    │       ├── Parts Cache ───── Per-season CSVs in Data/Parts/{table}/
+    │       ├── Parts Cache ───── Per-season CSVs in Data/Parts/{table}/ (via TableIO)
     │       │
     │       └── Assignments ───── Post-pull DataFrame mutations
     │
-    └── LocalIO ───────────────── Reads/writes combined CSV in Data/{table}.csv
+    └── TableIO ───────────────── Reads/writes combined CSV in Data/{table}.csv
+            │
+            └── DCMStorage ────── Configured storage. Presents one file tree of CSVs and JSON
+                    │
+                    └── StorageBackend ── Adapter base class (LocalStorage, SupabaseStorage)
 ```
+
+Primatives never call an adapter. They read and write through `TableIO` and `DCMStorage`, so the package runs unchanged on any configured `StorageBackend`. Storage lives in `Engine/Storage/`.
 
 ## Components
 
@@ -70,7 +76,8 @@ Orchestrates the full pull flow for a table. Replaces the old `DataPull` iterati
 - `handle_single_pull()` → Non-iter tables: single download
 - `handle_iter_pull(stale_parts)` → Iter tables: loop seasons, pull or read cache
 - `pull_and_cache_part(season)` → Download season file, write to Parts cache
-- `read_cached_part(season)` → Read from Parts cache
+- `read_cached_part(season)` → Read from Parts cache. A missing or unparseable part is a cache miss. Storage failures raise.
+- `part_io(season)` → `TableIO` for a season part (raw, so no assignment columns)
 - `apply_assignments()` → Run assignment functions on pulled DataFrame
 
 **Caching Strategy:**
@@ -79,14 +86,13 @@ Orchestrates the full pull flow for a table. Replaces the old `DataPull` iterati
 - If `stale_parts` is None, all seasons are re-downloaded (full pull)
 - Cache misses fall back to fresh pull
 
-### LocalIO
-**File:** `LocalIO.py`
+### TableIO
+**File:** `TableIO.py`
 
-Handles reading and writing the combined CSV file in `Data/{table}.csv`.
+Reads and writes a mapped CSV through `DCMStorage`: the combined table CSV in `Data/{table}.csv`, and season parts with `assigned=False`.
 
-- `read()` → Load CSV into `self.df`
+- `read()` → Read the stored CSV once into `self.df`. Returns False when it is missing or lacks a mapped column
 - `write()` → Write `self.df` to CSV
-- `loadable()` → Check if file exists and has required columns
 - `add_assignment_cols()` → Augment column list with assignment-added columns
 
 ### Retry
@@ -114,7 +120,7 @@ DCMTable.__init__()
         → For each season: DataPull.pull() → write to Parts/
         → Concat all frames
         → apply_assignments()
-    → LocalIO.write() → Data/{table}.csv
+    → TableIO.write() → Data/{table}.csv
     → Save TableState, IterState
 ```
 
@@ -130,7 +136,7 @@ DCMTable.__init__()
         → Seasons 2024-2025: DataPull.pull() → write to Parts/
         → Concat all frames
         → apply_assignments()
-    → LocalIO.write() → Data/{table}.csv
+    → TableIO.write() → Data/{table}.csv
     → Save TableState, IterState
 ```
 
@@ -140,5 +146,5 @@ DCMTable.__init__()
     → TableMap.load_map()
     → Freshness (SLA passes)
         → needs_update = False
-    → LocalIO.read() → Load from Data/{table}.csv
+    → TableIO.read() → Load from Data/{table}.csv (False → pull as in First Load)
 ```

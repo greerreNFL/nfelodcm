@@ -22,7 +22,11 @@ python -m pytest tests/ -v
 
 ### `test_types.py` — JsonModel, TableState, SeasonState
 
-Tests the JSON-backed dataclass primitives that underpin state management. Covers default values, save/load round-trips, corrupt file handling, extra key tolerance, and atomic writes.
+Tests the JSON-backed dataclass primitives that underpin state management. Covers default values, load round-trips, corrupt file handling, and extra key tolerance.
+
+### `test_storage.py` — Storage Layer
+
+Tests `LocalStorage` and `SupabaseStorage` (mocked HTTP), `DCMStorage` configuration and reconciliation, `TableIO` reads and writes, and season state calculated once per configured backend. Covers missing objects, invalid keys, atomic writes, auth failures that are not treated as missing, and a failed `configure` keeping the previous backend.
 
 ### `test_table_config.py` — TableConfig Validation
 

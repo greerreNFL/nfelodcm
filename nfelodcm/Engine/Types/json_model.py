@@ -1,6 +1,4 @@
 import json
-import os
-import tempfile
 import dataclasses
 from pathlib import Path
 from typing import TypeVar, Type
@@ -16,9 +14,10 @@ class JsonModel:
     Subclasses define their fields as dataclass fields with defaults.
     Provides:
       - load(path)      classmethod, returns default instance if file missing/corrupt
-      - save(path)      atomic write via tempfile + os.replace
       - to_dict()       serializes to plain dict
       - from_dict(data) classmethod, ignores unknown keys, uses defaults for missing
+
+    Mutable state is stored through DCMStorage. load reads package files.
     """
 
     @classmethod
@@ -49,26 +48,3 @@ class JsonModel:
             except (json.JSONDecodeError, KeyError, TypeError):
                 return cls()
         return cls()
-
-    def save(self, path: Path) -> None:
-        """
-        Atomic write: write to a temp file in the same directory,
-        then os.replace to the target path. Prevents corruption
-        from interrupted writes.
-        """
-        path.parent.mkdir(parents=True, exist_ok=True)
-        fd, tmp_path = tempfile.mkstemp(
-            dir=path.parent,
-            suffix='.tmp',
-            prefix='.state_'
-        )
-        try:
-            with os.fdopen(fd, 'w') as fp:
-                json.dump(self.to_dict(), fp, indent=2)
-            os.replace(tmp_path, path)
-        except BaseException:
-            try:
-                os.unlink(tmp_path)
-            except OSError:
-                pass
-            raise

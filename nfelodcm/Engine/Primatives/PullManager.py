@@ -2,7 +2,9 @@ import pandas as pd
 
 import nfelodcm.nfelodcm.Utilities as utils
 import nfelodcm.nfelodcm.Engine.Assignments as assignments
+from nfelodcm.nfelodcm.Engine.Storage import DCMStorage, StorageError
 from .DataPull import DataPull
+from .TableIO import TableIO
 
 class PullManager():
     """
@@ -15,8 +17,6 @@ class PullManager():
         self.iter_state = iter_state
         self.dataPull = DataPull(config)
         self.pulled_df = None
-        ## resolve parts directory for caching ##
-        self.parts_dir = utils.parts_data_dir(config.name)
 
     def pull_and_cache_part(self, season):
         """
@@ -27,32 +27,38 @@ class PullManager():
         url = self.config.download_url.format(season)
         ## pull data ##
         df = self.dataPull.pull(url)
-        ## ensure parts directory exists ##
-        self.parts_dir.mkdir(parents=True, exist_ok=True)
         ## write to parts cache (raw, pre-assignment) ##
-        cache_path = self.parts_dir / '{0}.csv'.format(season)
-        df.to_csv(cache_path, index=False)
+        part = self.part_io(season)
+        part.df = df
+        part.write()
         return df
 
     def read_cached_part(self, season):
         """
-        Reads a cached season file from the parts directory.
-        Returns the dataframe or None if the cache does not exist.
+        Reads a cached season file.
+        Returns the dataframe or None if the cache does not exist or
+        cannot be parsed. Storage failures raise.
         """
-        cache_path = self.parts_dir / '{0}.csv'.format(season)
-        if not cache_path.exists():
-            return None
+        part = self.part_io(season)
         try:
-            df = pd.read_csv(
-                cache_path,
-                usecols=self.dataPull.columns,
-                dtype=self.dataPull.dtypes,
-                engine=self.config.engine
-            )
-            return df
+            if not part.read():
+                return None
+            return part.df
+        except StorageError:
+            raise
         except Exception as e:
             print('WARN: Failed to read cached part for season {0}: {1}'.format(season, e))
             return None
+
+    def part_io(self, season):
+        """
+        TableIO for a cached season part in Data/Parts/{table}/{season}.csv
+        """
+        return TableIO(
+            self.config,
+            utils.parts_data_dir(self.config.name) / '{0}.csv'.format(season),
+            assigned=False
+        )
 
     def handle_single_pull(self):
         """
@@ -67,7 +73,7 @@ class PullManager():
         If stale_parts is None, all seasons are re-downloaded (full pull).
         """
         accepts_partial = self.config.iter.accept_partial
-        current_season = utils.current_season()
+        current_season = DCMStorage.get_season_state().last_full_week['season']
         missing_parts = []
         frames = []
         ## loop through seasons ##
@@ -116,8 +122,10 @@ class PullManager():
             self.pulled_df = pd.concat(frames).reset_index(drop=True)
         ## save iter_state if present ##
         if self.iter_state is not None:
-            iter_state_path = utils.iter_state_path(self.config.name)
-            self.iter_state.save(iter_state_path)
+            DCMStorage.write_json(
+                utils.iter_state_path(self.config.name),
+                self.iter_state.to_dict()
+            )
 
     def apply_assignments(self):
         """

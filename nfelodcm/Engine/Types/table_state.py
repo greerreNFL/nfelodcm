@@ -8,7 +8,7 @@ from .json_model import JsonModel
 class TableState(JsonModel):
     """
     Mutable per-table runtime state.
-    One file per table at State/tables/{name}.json.
+    One file per table at State/Tables/{name}.json in the configured storage.
     """
     last_local_update: Optional[str] = None
     last_freshness_check: Optional[str] = None

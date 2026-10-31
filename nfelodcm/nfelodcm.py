@@ -7,15 +7,7 @@ import numpy
 ## local ##
 from .Engine import DCMTable
 import nfelodcm.nfelodcm.Utilities as utils
-from .Utilities.paths import SEASON_STATE_JSON
-from .Engine.Types import SeasonState
-
-## ensure local data and state folders exist ##
-utils.ensure_dirs()
-## init season state on load ##
-utils.set_season_state()
-## update local data freshness meta as needed ##
-utils.check_data()
+from .Engine.Storage.DCMStorage import DCMStorage
 
 ## wrappers and classes to interact with the package ##
 def get_df(table: str) -> pd.DataFrame:
@@ -29,7 +21,7 @@ def get_df(table: str) -> pd.DataFrame:
     * pd.DataFrame - the dataframe loaded from the table
     """
     engine = DCMTable(table)
-    return engine.localIO.df
+    return engine.tableIO.df
 
 def load(tables: List[str]) -> Dict[str, pd.DataFrame]:
     """
@@ -73,6 +65,15 @@ def get_map(url):
             col, dtype
         ))
 
+def configure(storage):
+    '''
+    Prepare storage, reconcile it, and make it the active backend.
+
+    Parameters:
+    * storage: StorageBackend - the backend to use for this process
+    '''
+    DCMStorage.configure(storage)
+
 def get_season_state(state_type='last_full_week') -> tuple:
     '''
     Returns the season and week of the specified state type:
@@ -80,8 +81,7 @@ def get_season_state(state_type='last_full_week') -> tuple:
        'last_partual_week': the last week where any game has been played
        'next_week': the first week with no games played
     '''
-    state = SeasonState.load(SEASON_STATE_JSON)
-    state_dict = state.to_dict()
+    state_dict = DCMStorage.get_season_state().week_states()
     ## check input ##
     if state_type not in state_dict:
         raise Exception('UTILITY ERROR: {0} is not an available state_type. Available types: {1}'.format(

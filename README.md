@@ -84,6 +84,9 @@ For season-iterated tables (pbp, rosters, player_stats, etc.), the DCM tracks fr
 
 ## Data Storage
 
+Mutable CSVs and JSON state are stored through the configured storage backend.
+The local filesystem is the default. Data is stored in this layout:
+
 ```
 Data/
   games.csv
@@ -142,6 +145,20 @@ tables = nfelodcm.list_tables()
 
 # Get current season state
 season, week = nfelodcm.get_season_state('last_full_week')
+
+# Supabase Storage. The bucket must already exist.
+# prefix is optional. It places every object under that folder.
+# CSVs are stored gzip compressed as .csv.gz.
+# SUPABASE_STORAGE_URL is the project origin:
+# https://<project-ref>.supabase.co
+import os
+nfelodcm.configure(storage=nfelodcm.SupabaseStorage(
+    url=os.environ['SUPABASE_STORAGE_URL'],
+    key=os.environ['SUPABASE_SERVICE_ROLE_KEY'],
+    bucket='your-bucket',
+    prefix='dcm',
+))
+db = nfelodcm.load(['games'])
 ```
 
 ## Further Detailed Documentation

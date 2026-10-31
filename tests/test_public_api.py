@@ -2,28 +2,33 @@
 Tests for public API contract (no network)
 """
 import pytest
+import datetime
 
-from nfelodcm.nfelodcm.Utilities.paths import SEASON_STATE_JSON
+from nfelodcm.nfelodcm.nfelodcm import get_season_state
+from nfelodcm.nfelodcm.Engine.Storage import DCMStorage
 from nfelodcm.nfelodcm.Engine.Types import SeasonState
 
 
-class TestGetSeasonState:
-    def test_get_season_state_returns_tuple(self):
-        """Returns (season, week) tuple"""
-        ## load state directly to avoid triggering full package import ##
-        state = SeasonState.load(SEASON_STATE_JSON)
-        state_dict = state.to_dict()
-        if 'last_full_week' in state_dict and state_dict['last_full_week']['season'] is not None:
-            result = (state_dict['last_full_week']['season'], state_dict['last_full_week']['week'])
-            assert isinstance(result, tuple)
-            assert len(result) == 2
+def _preset_season_state(monkeypatch, state):
+    """Helper to hold a current, already stored season state so no download or storage read happens"""
+    state.last_updated = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    monkeypatch.setattr(DCMStorage, 'season_state', state)
+    monkeypatch.setattr(DCMStorage, 'stored_season_state', state)
 
-    def test_get_season_state_invalid_type_raises(self):
-        """Bad state_type raises"""
-        state = SeasonState.load(SEASON_STATE_JSON)
-        state_dict = state.to_dict()
-        with pytest.raises(KeyError):
-            _ = state_dict['totally_invalid_type']
+
+class TestGetSeasonState:
+    def test_get_season_state_returns_tuple(self, monkeypatch):
+        """Returns (season, week) tuple from the configured storage's season state"""
+        _preset_season_state(monkeypatch, SeasonState(
+            last_full_week={'season': 2024, 'week': 18}
+        ))
+        assert get_season_state('last_full_week') == (2024, 18)
+
+    def test_get_season_state_invalid_type_raises(self, monkeypatch):
+        """Bad state_type raises, and last_updated is not a state_type"""
+        _preset_season_state(monkeypatch, SeasonState())
+        with pytest.raises(Exception, match='not an available state_type'):
+            get_season_state('last_updated')
 
 
 class TestListTables:

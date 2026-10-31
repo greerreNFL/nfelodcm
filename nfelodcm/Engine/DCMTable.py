@@ -2,9 +2,10 @@ import pandas as pd
 import numpy
 import datetime
 
-from .Primatives import TableMap, Freshness, PullManager, LocalIO
-from nfelodcm.nfelodcm.Utilities.paths import table_state_path, iter_state_path
+from .Primatives import TableMap, Freshness, PullManager, TableIO
+from nfelodcm.nfelodcm.Utilities.paths import table_state_path, iter_state_path, data_path
 from nfelodcm.nfelodcm.Engine.Types import TableState, IterState
+from nfelodcm.nfelodcm.Engine.Storage.DCMStorage import DCMStorage
 
 class DCMTable():
     """
@@ -17,11 +18,11 @@ class DCMTable():
         self.check_table_map()
         ## init table state (mutable) ##
         self.state_path = table_state_path(self.table)
-        self.tableState = TableState.load(self.state_path)
+        self.tableState = DCMStorage.read_model(TableState, self.state_path)
         ## init iter state for iter tables ##
         self.iter_state = None
         if self.tableMap.config.iter.type is not None:
-            self.iter_state = IterState.load(iter_state_path(self.table))
+            self.iter_state = DCMStorage.read_model(IterState, iter_state_path(self.table))
         ## init freshness, passing state values and iter_state ##
         self.freshness = Freshness(
             self.tableMap.config,
@@ -31,8 +32,8 @@ class DCMTable():
         )
         ## init pull manager (replaces DataPull for orchestration) ##
         self.pullManager = PullManager(self.tableMap.config, iter_state=self.iter_state)
-        ## init local io ##
-        self.localIO = LocalIO(self.tableMap.config, self.tableMap.table_data_location)
+        ## init table io ##
+        self.tableIO = TableIO(self.tableMap.config, data_path(self.table))
         ## handle load ##
         self.handle_load()
 
@@ -52,28 +53,26 @@ class DCMTable():
         """
         Handles loading of the table based on freshness status.
         """
-        ## add a check to always make sure there is a local file in the DB.
-        ## If a CSV is deleted or a write fails, timestamps, and therefore
-        ## freshness, may incorrectly assume we have a current file to read
-        if not self.localIO.loadable():
-            ## if the csv does not exist, flag the update flag ##
+        ## if no update is needed, read the stored file. If a CSV is deleted
+        ## or a write fails, timestamps, and therefore freshness, may
+        ## incorrectly assume we have a current file to read
+        if not self.freshness.needs_update and not self.tableIO.read():
+            ## if the csv cannot be read, flag the update flag ##
             self.freshness.needs_update=True
         if self.freshness.freshness_check_time is not None:
             ## if freshness was checked, update the time in state ##
             self.tableState.last_freshness_check = self.freshness.freshness_check_time
-            self.tableState.save(self.state_path)
+            DCMStorage.write_json(self.state_path, self.tableState.to_dict())
         ## reference freshness to determine where to pull data from ##
         if self.freshness.needs_update:
             ## pull new data, passing stale_parts for selective iter pulls ##
             self.pullManager.update_data(stale_parts=self.freshness.stale_parts)
-            ## load into local io ##
-            self.localIO.df = self.pullManager.pulled_df
+            ## load into table io ##
+            self.tableIO.df = self.pullManager.pulled_df
             ## write ##
-            self.localIO.write()
+            self.tableIO.write()
             ## update state timestamp with a UTC iso timestamp ##
             ## use datetime.now(datetime.timezone.utc) to ensure we also write the timezone offset, so
             ## operations that use the timestamp are not ambiguous (ie read it as local time b/c there is no offset)
             self.tableState.last_local_update = datetime.datetime.now(datetime.timezone.utc).isoformat()
-            self.tableState.save(self.state_path)
-        else:
-            self.localIO.read()
+            DCMStorage.write_json(self.state_path, self.tableState.to_dict())
