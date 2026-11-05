@@ -1,5 +1,7 @@
 from .nfelodcm.nfelodcm import get_df
 from .nfelodcm.nfelodcm import load
+from .nfelodcm.nfelodcm import check
+from .nfelodcm.nfelodcm import refresh
 from .nfelodcm.nfelodcm import get_map
 from .nfelodcm.nfelodcm import get_season_state
 from .nfelodcm.nfelodcm import list_tables

@@ -11,7 +11,7 @@ class DCMTable():
     """
     Takes a table name and handles all backend loading and pulling of data.
     """
-    def __init__(self, table):
+    def __init__(self, table, load=True):
         self.table = table
         ## init table map (read-only config) ##
         self.tableMap = TableMap(self.table)
@@ -35,7 +35,8 @@ class DCMTable():
         ## init table io ##
         self.tableIO = TableIO(self.tableMap.config, data_path(self.table))
         ## handle load ##
-        self.handle_load()
+        if load:
+            self.handle_load()
 
     def check_table_map(self):
         """
@@ -76,3 +77,16 @@ class DCMTable():
             ## operations that use the timestamp are not ambiguous (ie read it as local time b/c there is no offset)
             self.tableState.last_local_update = datetime.datetime.now(datetime.timezone.utc).isoformat()
             DCMStorage.write_json(self.state_path, self.tableState.to_dict())
+
+    def report(self):
+        '''
+        Return the freshness metadata init already computed.
+        '''
+        return {
+            'table': self.table,
+            'needs_update': self.freshness.needs_update,
+            'stale_parts': self.freshness.stale_parts,
+            'freshness_check_time': self.freshness.freshness_check_time,
+            'last_freshness_check': self.tableState.last_freshness_check,
+            'last_local_update': self.tableState.last_local_update,
+        }

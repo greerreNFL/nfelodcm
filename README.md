@@ -137,6 +137,12 @@ db = nfelodcm.load(['pbp', 'games'])
 # Get a single DataFrame
 df = nfelodcm.get_df('pbp')
 
+# Freshness metadata from init. Does not download a CSV.
+report = nfelodcm.check(['pbp', 'games'])
+
+# Run the existing load, then return the same metadata.
+report = nfelodcm.refresh(['pbp', 'games'])
+
 # Get table config
 config = nfelodcm.get_map('games')
 

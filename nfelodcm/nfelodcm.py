@@ -35,19 +35,47 @@ def load(tables: List[str]) -> Dict[str, pd.DataFrame]:
     """
     ## init db structure ##
     db = {}
-    ## check that all passed tables have maps ##
-    map_data = utils.load_maps()
-    maps = list(map_data.keys()) if len(map_data) > 0 else []
-    missing_maps = [t for t in tables if t not in maps]
-    if len(missing_maps) > 0:
-        raise Exception('MAP ERROR: The following tables do not have maps: {0}'.format(
-            '\n     '.join(missing_maps)
-        ))
+    utils.validate_table_request(tables)
     ## add tables ##
     for table in tables:
         db[table] = get_df(table)
     ## return db struc ##
     return db
+
+def check(tables: List[str]) -> Dict:
+    '''
+    Return the freshness metadata init already computed.
+    Does not pull and does not download a CSV.
+
+    Parameters:
+    * tables: List[str] - a list of table names to check
+
+    Returns:
+    * Dict - one result, with a tables list in input order
+    '''
+    utils.validate_table_request(tables)
+    reported = []
+    for table in tables:
+        engine = DCMTable(table, load=False)
+        reported.append(engine.report())
+    return {'tables': reported}
+
+def refresh(tables: List[str]) -> Dict:
+    '''
+    Run the existing load for each table, then return report().
+
+    Parameters:
+    * tables: List[str] - a list of table names to refresh
+
+    Returns:
+    * Dict - one result, with a tables list in input order
+    '''
+    utils.validate_table_request(tables)
+    reported = []
+    for table in tables:
+        engine = DCMTable(table)
+        reported.append(engine.report())
+    return {'tables': reported}
 
 def get_map(url):
     '''
@@ -67,7 +95,7 @@ def get_map(url):
 
 def configure(storage):
     '''
-    Prepare storage, reconcile it, and make it the active backend.
+    Prepare storage and make it the active backend.
 
     Parameters:
     * storage: StorageBackend - the backend to use for this process

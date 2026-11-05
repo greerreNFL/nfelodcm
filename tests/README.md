@@ -26,7 +26,7 @@ Tests the JSON-backed dataclass primitives that underpin state management. Cover
 
 ### `test_storage.py` — Storage Layer
 
-Tests `LocalStorage` and `SupabaseStorage` (mocked HTTP), `DCMStorage` configuration and reconciliation, `TableIO` reads and writes, and season state calculated once per configured backend. Covers missing objects, invalid keys, atomic writes, auth failures that are not treated as missing, and a failed `configure` keeping the previous backend.
+Tests `LocalStorage` and `SupabaseStorage` (mocked HTTP), `DCMStorage` configuration, `TableIO` reads and writes, and season state calculated once per configured backend. Covers missing objects, invalid keys, atomic writes, auth failures that are not treated as missing, and a failed `configure` keeping the previous backend.
 
 ### `test_table_config.py` — TableConfig Validation
 
@@ -47,6 +47,10 @@ Tests the assignment registry in `Engine/Assignments/`. Validates that every reg
 ### `test_public_api.py` — API Contract
 
 Tests the public-facing API surface without triggering downloads. Covers `get_season_state()` return shape, invalid state type handling, `load_maps()` availability, and `TableMap` behavior for nonexistent tables.
+
+### `test_check_refresh.py` — check and refresh
+
+Tests `validate_table_request`, `check()`, and `report()`. Covers the shared `MAP ERROR` messages and a check that stays inside the SLA and does not pull.
 
 ## Shared Fixtures (`conftest.py`)
 

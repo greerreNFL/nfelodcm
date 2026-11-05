@@ -7,7 +7,7 @@ import pandas as pd
 
 import nfelodcm.nfelodcm.Utilities.paths as paths
 from nfelodcm.nfelodcm.Utilities.calc_season_state import calc_season_state, infer_season_state
-from nfelodcm.nfelodcm.Engine.Types import TableState, IterState, SeasonState
+from nfelodcm.nfelodcm.Engine.Types import SeasonState
 from nfelodcm.nfelodcm.Engine.Storage.StorageBackend import (
     StorageBackend, StorageError, MissingObjectError
 )
@@ -48,51 +48,17 @@ class DCMStorage():
 
     @classmethod
     def configure(cls, backend):
-        """
-        Prepare and reconcile a backend, then make it the active backend.
+        '''
+        Prepare a backend, then make it the active backend.
         A failure raises and leaves the previous backend active.
-        """
+        '''
         if not isinstance(backend, StorageBackend):
             raise StorageError('STORAGE ERROR: configure requires a StorageBackend')
         ## ready the candidate before anything reads from it ##
         backend.prepare([cls.object_key(folder) for folder in cls.FOLDERS])
-        cls.reconcile(backend)
         ## publish. Season state in memory is kept, but the new backend is unchecked ##
         cls.backend = backend
         cls.stored_season_state = None
-
-    @classmethod
-    def reconcile(cls, backend):
-        """
-        Checks each packaged map for a stored CSV on the backend. Missing
-        CSVs have their state reset so freshness does not assume a current
-        file. Existence is collected before any state is reset, so a
-        storage error aborts with no resets.
-        """
-        ## pass 1: existence only ##
-        found = []
-        for map_path in paths.MAPS_DIR.glob('*.json'):
-            table = map_path.stem
-            found.append((
-                table,
-                backend.exists(cls.object_key(paths.data_path(table))),
-                backend.exists(cls.object_key(paths.iter_state_path(table)))
-            ))
-        ## pass 2: reset confirmed gaps ##
-        for table, csv_exists, iter_exists in found:
-            if csv_exists:
-                continue
-            backend.write(
-                cls.object_key(paths.table_state_path(table)),
-                cls.json_bytes(TableState().to_dict()),
-                'application/json'
-            )
-            if iter_exists:
-                backend.write(
-                    cls.object_key(paths.iter_state_path(table)),
-                    cls.json_bytes(IterState().to_dict()),
-                    'application/json'
-                )
 
     @classmethod
     def get_season_state(cls):

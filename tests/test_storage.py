@@ -80,26 +80,26 @@ class TestDCMStorage:
         for folder in DCMStorage.FOLDERS:
             assert (tmp_path / folder).is_dir()
 
-    def test_configure_reconciles_missing_csvs(self, local_storage):
-        """Missing CSVs reset table and iter state. Present CSVs keep their state."""
-        ## pbp has iter state but no csv, games has a csv and state ##
+    def test_configure_leaves_existing_state(self, local_storage):
+        '''A missing CSV does not reset table or iter state.'''
         local_storage.write('State/Parts/pbp.json', json.dumps({'season_timestamps': {'2024': 'ts'}}).encode(), 'application/json')
         local_storage.write('Data/games.csv', b'a\n1\n', 'text/csv')
         local_storage.write('State/Tables/games.json', json.dumps({'last_local_update': 'ts'}).encode(), 'application/json')
         DCMStorage.configure(local_storage)
-        assert json.loads(local_storage.read('State/Parts/pbp.json')) == {'season_timestamps': {}}
-        assert json.loads(local_storage.read('State/Tables/pbp.json'))['last_local_update'] is None
+        assert json.loads(local_storage.read('State/Parts/pbp.json')) == {'season_timestamps': {'2024': 'ts'}}
+        with pytest.raises(MissingObjectError):
+            local_storage.read('State/Tables/pbp.json')
         assert json.loads(local_storage.read('State/Tables/games.json'))['last_local_update'] == 'ts'
 
     def test_configure_failure_keeps_previous_backend(self, local_storage):
-        """A storage error during reconcile raises, writes nothing, and keeps the previous backend"""
+        '''A storage error during prepare raises, writes nothing, and keeps the previous backend'''
         DCMStorage.configure(local_storage)
 
         class FailingStorage(StorageBackend):
             def __init__(self):
                 self.writes = []
             def prepare(self, folders):
-                pass
+                raise StorageError('STORAGE ERROR: down')
             def exists(self, key):
                 raise StorageError('STORAGE ERROR: down')
             def read(self, key):
