@@ -2,15 +2,10 @@
 
 ## v0.3.1
 #### Features
-- **check and refresh**: `check(tables)` and `refresh(tables)` take the same names as `load`. `validate_table_request` rejects an empty list, duplicate names, and names with no map. Each rejection is an `Exception` whose message starts with `MAP ERROR:`. `load` uses the same utility.
-- `check` constructs `DCMTable(table, load=False)` and returns `report()`. `report()` is the freshness metadata init already computed: `table`, `needs_update`, `stale_parts`, `freshness_check_time`, `last_freshness_check`, and `last_local_update`. `check` does not pull and does not download a CSV.
-- `refresh` constructs `DCMTable(table)`, so the existing `handle_load` runs, then returns the same `report()`.
+- **check and refresh**: `check(tables)` returns freshness metadata for each table without downloading a CSV. `refresh(tables)` loads each table, then returns the same metadata. Both take the same names as `load`. An empty list, a duplicate name, or a name with no map raises `MAP ERROR`. `load` raises those same errors.
 
-#### Storage writes
-- `configure` prepares the storage folders and makes the backend active. It does not scan maps, and it does not reset table state or iter state.
-- `get_season_state` can write season state.
-- `load`, `get_df`, and `refresh` can write table state, iter state, the CSV, and season state.
-- `check` can write season state during the freshness check. It does not write the CSV or table timestamps.
+#### Breaking
+- `configure` prepares the storage folders and makes the backend active. It no longer checks every map for a CSV or resets table state and iter state when a CSV is missing.
 
 
 ---
