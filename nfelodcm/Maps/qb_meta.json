@@ -28,6 +28,7 @@
     "last_name": "object",
     "short_name": "object",
     "status": "object",
+    "latest_team": "object",
     "dob": "object",
     "college": "object",
     "height": "float32",

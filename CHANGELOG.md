@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.2
+#### Patch
+- **qb_meta map**: Added `latest_team`.
+
+
+---
+
 ## v0.3.1
 #### Features
 - **check and refresh**: `check(tables)` returns freshness metadata for each table without downloading a CSV. `refresh(tables)` loads each table, then returns the same metadata. Both take the same names as `load`. An empty list, a duplicate name, or a name with no map raises `MAP ERROR`. `load` raises those same errors.

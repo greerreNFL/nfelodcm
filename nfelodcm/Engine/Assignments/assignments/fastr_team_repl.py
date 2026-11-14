@@ -13,7 +13,7 @@ def team_id_repl(df):
         'side_of_field', 'timeout_team', 'td_team',
         'return_team', 'possession_team',
         'recent_team', 'opponent_team',
-        'draft_team', 'draft_club', 'team'
+        'draft_team', 'draft_club', 'latest_team', 'team'
     ]:
         if col in df.columns:
             df[col] = df[col].replace(FASTR_TO_LEGACY_TEAM)
